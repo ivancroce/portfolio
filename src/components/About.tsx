@@ -1,17 +1,30 @@
 import { FaLaptopCode, FaLayerGroup, FaRocket } from "react-icons/fa";
+import { motion, type Variants } from "framer-motion";
+import { fadeIn, staggerContainer, textVariant } from "../utils/motion";
 
 const About = () => {
+  const containerVariants: Variants = staggerContainer();
+  const headerVariants: Variants = textVariant(0.1);
+  const subHeaderVariants: Variants = textVariant(0.2);
+  const descriptionVariants: Variants = fadeIn("", "tween", 0.1, 1);
+
+  const card1Variants: Variants = fadeIn("right", "tween", 0.5, 0.75);
+  const card2Variants: Variants = fadeIn("up", "tween", 0.75, 0.75);
+  const card3Variants: Variants = fadeIn("left", "tween", 1, 0.75);
+
   return (
     <section className="py-5 overflow-hidden" id="about">
-      <div className="container py-5">
+      <motion.div variants={containerVariants} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.1 }} className="container py-5">
         <div className="text-center mb-5">
-          <h6 className="text-primary text-uppercase letter-spacing-2 mb-2">About Me</h6>
-          <h2 className="display-5 fw-bold">
+          <motion.h6 variants={headerVariants} className="text-primary text-uppercase letter-spacing-2 mb-2">
+            About Me
+          </motion.h6>
+          <motion.h2 variants={subHeaderVariants} className="display-5 fw-bold">
             Passionate about building meaningful <br />
             <span className="text-primary">digital experiences</span>
-          </h2>
+          </motion.h2>
         </div>
-        <div className="row justify-content-center mb-5">
+        <motion.div variants={descriptionVariants} className="row justify-content-center mb-5">
           <div className="col-lg-8">
             <div className="card gradient-card p-4 mb-4">
               <div className="card-body text-secondary">
@@ -26,9 +39,9 @@ const About = () => {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
         <div className="row g-4 text-center">
-          <div className="col-md-4">
+          <motion.div variants={card1Variants} className="col-md-4">
             <div className="card gradient-card h-100 p-4 hover-effect">
               <div className="card-body">
                 <div className="text-primary display-6 mb-3">
@@ -40,8 +53,8 @@ const About = () => {
                 </p>
               </div>
             </div>
-          </div>
-          <div className="col-md-4">
+          </motion.div>
+          <motion.div variants={card2Variants} className="col-md-4">
             <div className="card gradient-card h-100 p-4 hover-effect">
               <div className="card-body">
                 <div className="text-primary display-6 mb-3">
@@ -53,8 +66,8 @@ const About = () => {
                 </p>
               </div>
             </div>
-          </div>
-          <div className="col-md-4">
+          </motion.div>
+          <motion.div variants={card3Variants} className="col-md-4">
             <div className="card gradient-card h-100 p-4 hover-effect">
               <div className="card-body">
                 <div className="text-primary display-6 mb-3">
@@ -66,9 +79,9 @@ const About = () => {
                 </p>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };
