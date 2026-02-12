@@ -12,6 +12,11 @@ const Hero = () => {
     setMousePos({ x: `${x}px`, y: `${y}px` });
   };
 
+  const handleScroll = () => {
+    const aboutSection = document.getElementById("about");
+    aboutSection?.scrollIntoView({ behavior: "smooth" });
+  };
+
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
@@ -44,7 +49,7 @@ const Hero = () => {
 
       <motion.div className="container position-relative z-1" variants={containerVariants} initial="hidden" animate="visible">
         <motion.div variants={itemVariants} className="mb-4">
-          <h1 className="display-1 fw-bold text-neon">
+          <h1 className="display-1 fw-bold text-neon d-flex justify-content-center flex-wrap gap-2">
             {Array.from("IVAN CROCE").map((letter, i) => (
               <motion.span
                 key={i}
@@ -84,12 +89,13 @@ const Hero = () => {
         </motion.div>
       </motion.div>
       {/* Scroll Indicator */}
-      <motion.div
+      <motion.button
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 1 }}
-        className="position-absolute bottom-0 start-50 translate-middle-x mb-5 z-2"
-        role="button"
+        className="bg-transparent border-0 position-absolute bottom-0 start-50 translate-middle-x mb-5 z-2 p-0"
+        onClick={handleScroll}
+        aria-label="Scroll to About section"
       >
         <div className="scrolldown">
           <div className="chevrons">
@@ -97,7 +103,7 @@ const Hero = () => {
             <div className="chevrondown"></div>
           </div>
         </div>
-      </motion.div>
+      </motion.button>
     </section>
   );
 };

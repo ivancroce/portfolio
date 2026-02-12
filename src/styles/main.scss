@@ -14,6 +14,10 @@ body {
   overflow-x: hidden;
 }
 
+.letter-spacing-2 {
+  letter-spacing: 2px;
+}
+
 // Grid Background
 .hero-background {
   background-size: 50px 50px;
@@ -112,7 +116,6 @@ body {
   position: relative;
   width: var(--sizeX);
   height: var(--sizeY);
-  margin-left: var(sizeX / 2);
   border: calc(var(--sizeX) / 10) solid var(--color);
   border-radius: 50px;
   box-sizing: border-box;
@@ -219,4 +222,21 @@ body {
     z-index: 1;
     pointer-events: none;
   }
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: $dark;
+}
+
+::-webkit-scrollbar-thumb {
+  background: darken($primary, 10%);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: $primary;
 }
