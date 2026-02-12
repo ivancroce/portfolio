@@ -1,0 +1,12 @@
+@use "sass:color";
+$primary: #20c997; // Teal
+$secondary: #64748b; // Slate
+$dark: #1e293b;
+$light: #f8f9fa;
+$body-bg: #0f172a;
+$body-color: $light;
+$font-family-sans-serif:
+  "Inter",
+  system-ui,
+  -apple-system,
+  sans-serif;

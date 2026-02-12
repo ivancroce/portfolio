@@ -1,0 +1,15 @@
+@use "variables" as *;
+
+@use "bootstrap/scss/bootstrap" with (
+  $primary: $primary,
+  $secondary: $secondary,
+  $dark: $dark,
+  $light: $light,
+  $body-bg: $body-bg,
+  $body-color: $body-color,
+  $font-family-sans-serif: $font-family-sans-serif
+);
+
+body {
+  overflow-x: hidden;
+}
