@@ -18,6 +18,7 @@ body {
   letter-spacing: 2px;
 }
 
+// ### HERO ###
 // Grid Background
 .hero-background {
   background-size: 50px 50px;
@@ -93,6 +94,7 @@ body {
 
   &:hover {
     color: $primary !important;
+    border-color: $primary !important;
     transform: translateY(-3px);
     border-color: rgba(45, 212, 191, 0.5); // Brighter on hover
     box-shadow: 0 10px 30px -10px rgba($primary, 0.15);
@@ -224,6 +226,7 @@ body {
   }
 }
 
+// Scrollbar style
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -239,4 +242,16 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: $primary;
+}
+
+// ### ABOUT ME ###
+.gradient-card {
+  @extend .hero-btn;
+  transition:
+    transform 0.5s ease,
+    border-color 0.5s ease,
+    box-shadow 0.5s ease;
+  &:hover {
+    color: white !important;
+  }
 }
