@@ -1,3 +1,6 @@
+import { motion, type Variants } from "framer-motion";
+import { fadeIn, textVariant, staggerContainer } from "../utils/motion";
+
 type Tech = {
   name: string;
   img: string;
@@ -36,32 +39,42 @@ const TechStack = () => {
   // Double the array to ensure the track is long enough for the animation loop
   const trackItems = [...techs, ...techs];
 
+  const containerVariants: Variants = staggerContainer();
+  const headerVariants: Variants = textVariant(0.1);
+  const titleVariants: Variants = textVariant(0.2);
+  const descriptionVariants: Variants = fadeIn("", "tween", 0.1, 1);
+  const carouselVariants: Variants = fadeIn("up", "tween", 0.3, 1);
+
   const renderTrack = (keyPrefix: string) => (
     <div className="tech-carousel-track">
       {trackItems.map((tech, index) => (
-        <div key={`${keyPrefix}-${tech.name}-${index}`} className="tech-card">
-          <div className="mb-3 d-flex justify-content-center align-items-center tech-icon-wrapper">
-            <img src={tech.img} alt={tech.name} className={`tech-icon ${tech.invert ? "invert-white" : ""}`} />
-          </div>
+        <motion.div key={`${keyPrefix}-${tech.name}-${index}`} className="tech-card">
+          <img src={tech.img} alt={tech.name} className={`tech-icon mb-3 ${tech.invert ? "invert-white" : ""}`} />
           <h6 className="mb-0">{tech.name}</h6>
-        </div>
+        </motion.div>
       ))}
     </div>
   );
 
   return (
     <section className="py-5 bg-darker overflow-hidden" id="tech-stack">
-      <div className="container-fluid py-5">
+      <motion.div variants={containerVariants} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.1 }} className="container-fluid py-5">
         <div className="text-center mb-5">
-          <h6 className="text-primary text-uppercase letter-spacing-2 mb-2">Tech Stack</h6>
-          <h2 className="display-4 fw-bold">Tech Stack & Tools</h2>
-          <p className="text-secondary mt-3">Technologies I use to build fast, scalable, and user-focused applications.</p>
+          <motion.h6 variants={headerVariants} className="text-primary text-uppercase letter-spacing-2 mb-2">
+            Tech Stack
+          </motion.h6>
+          <motion.h2 variants={titleVariants} className="display-4 fw-bold">
+            Tech Stack & Tools
+          </motion.h2>
+          <motion.p variants={descriptionVariants} className="text-secondary mt-3">
+            Technologies I use to build fast, scalable, and user-focused applications.
+          </motion.p>
         </div>
-        <div className="tech-carousel-container">
+        <motion.div variants={carouselVariants} className="tech-carousel-container">
           {renderTrack("track-1")}
           {renderTrack("track-2")}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 };

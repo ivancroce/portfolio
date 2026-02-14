@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
 import { motion, type Variants } from "framer-motion";
+import { staggerContainer, fadeIn } from "../utils/motion";
 
 const Hero = () => {
   const [mousePos, setMousePos] = useState({ x: "50%", y: "50%" });
@@ -17,25 +18,11 @@ const Hero = () => {
     aboutSection?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.3,
-        delayChildren: 0.2
-      }
-    }
-  };
-
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8, ease: "easeOut" }
-    }
-  };
+  const heroContainerVariants: Variants = staggerContainer(0.1, 0.2);
+  const getLetterVariant = (index: number) => fadeIn("up", "tween", index * 0.1 + 0.2, 0.8);
+  const descriptionVariants: Variants = fadeIn("up", "tween", 1.2, 1);
+  const iconsContainerVariants: Variants = fadeIn("up", "tween", 1.4, 1);
+  const scrollButtonVariants: Variants = fadeIn("up", "tween", 2, 1);
 
   return (
     <section
@@ -47,31 +34,22 @@ const Hero = () => {
       <div className="hero-background"></div>
       <div className="hero-glow"></div>
 
-      <motion.div className="container position-relative z-1" variants={containerVariants} initial="hidden" animate="visible">
-        <motion.div variants={itemVariants} className="mb-4">
+      <motion.div className="container position-relative z-1" variants={heroContainerVariants} initial="hidden" animate="show">
+        <div className="mb-4">
           <h1 className="display-1 fw-bold text-neon d-flex justify-content-center flex-wrap gap-2">
             {Array.from("IVAN CROCE").map((letter, i) => (
-              <motion.span
-                key={i}
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.8,
-                  ease: "easeOut",
-                  delay: i * 0.1 + 0.5 // Start after container delay + stagger
-                }}
-                className="d-inline-block"
-              >
+              <motion.span key={i} variants={getLetterVariant(i)} className="d-inline-block">
                 {letter === " " ? "\u00A0" : letter}
               </motion.span>
             ))}
           </h1>
-        </motion.div>
-        <motion.p variants={itemVariants} className="lead text-secondary mx-auto mb-5">
+        </div>
+
+        <motion.p variants={descriptionVariants} className="lead text-secondary mx-auto mb-5">
           Junior Full Stack Developer passionate about building web applications.
         </motion.p>
 
-        <motion.div variants={itemVariants} className="d-flex justify-content-center mb-5 gap-3">
+        <motion.div variants={iconsContainerVariants} className="d-flex justify-content-center mb-5 gap-3">
           <a href="https://github.com/ivancroce" target="_blank" className="hero-btn rounded-circle p-3 text-white text-decoration-none">
             <FaGithub size={24} />
           </a>
@@ -88,11 +66,12 @@ const Hero = () => {
           </a>
         </motion.div>
       </motion.div>
+
       {/* Scroll Indicator */}
       <motion.button
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 1 }}
+        variants={scrollButtonVariants}
+        initial="hidden"
+        animate="show"
         className="bg-transparent border-0 position-absolute bottom-0 start-50 translate-middle-x mb-5 z-2 p-0"
         onClick={handleScroll}
         aria-label="Scroll to About section"
