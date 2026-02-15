@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
 import { motion, type Variants } from "framer-motion";
-import { staggerContainer, fadeIn } from "../utils/motion";
+import { fadeIn } from "../utils/motion"; // Removed unused 'staggerContainer' import
 
 const Hero = () => {
   const [mousePos, setMousePos] = useState({ x: "50%", y: "50%" });
@@ -18,8 +18,16 @@ const Hero = () => {
     aboutSection?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const heroContainerVariants: Variants = staggerContainer(0.1, 0.2);
+  const heroContainerVariants: Variants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: { duration: 0.1 } // Instant transition so children start timing immediately
+    }
+  };
+
   const getLetterVariant = (index: number) => fadeIn("up", "tween", index * 0.1 + 0.2, 0.8);
+
   const descriptionVariants: Variants = fadeIn("up", "tween", 1.2, 1);
   const iconsContainerVariants: Variants = fadeIn("up", "tween", 1.4, 1);
   const scrollButtonVariants: Variants = fadeIn("up", "tween", 2, 1);
