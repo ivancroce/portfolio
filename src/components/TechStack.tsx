@@ -50,7 +50,7 @@ const TechStack = () => {
       {trackItems.map((tech, index) => (
         <motion.div key={`${keyPrefix}-${tech.name}-${index}`} className="tech-card">
           <img src={tech.img} alt={tech.name} className={`tech-icon mb-3 ${tech.invert ? "invert-white" : ""}`} />
-          <h6 className="mb-0">{tech.name}</h6>
+          <h5 className="h6 mb-0">{tech.name}</h5>
         </motion.div>
       ))}
     </div>

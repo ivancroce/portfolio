@@ -22,6 +22,30 @@ body {
   background-color: darken($body-bg, 2%) !important;
 }
 
+.hover-primary:hover {
+  color: $primary !important;
+}
+
+.text-justify {
+  text-align: justify;
+}
+
+.text-relaxed {
+  line-height: 1.7;
+}
+
+.hover-effect {
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+  &:hover {
+    transform: translateY(-5px);
+    border-color: $primary !important;
+    box-shadow: 0 10px 30px -10px rgba($primary, 0.3);
+  }
+}
+
 // Shared Glass Card Style
 %glass-card {
   background: linear-gradient(145deg, rgba(15, 23, 42, 0.8) 0%, rgba(10, 15, 26, 0.9) 100%);
@@ -110,55 +134,6 @@ body {
     0 0 20px rgba($primary, 0.4),
     0 0 40px rgba($primary, 0.2);
 }
-
-/* .hero-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(145deg, rgba(15, 23, 42, 0.8) 0%, rgba(10, 15, 26, 0.9) 100%);
-  border: 1px solid rgba(45, 212, 191, 0.2);
-  position: relative;
-  overflow: hidden;
-  backdrop-filter: blur(10px);
-  box-shadow:
-    0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  transition:
-    transform 0.3s ease,
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
-
-  // Top gradient highlight
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(800px circle at top center, rgba($primary, 0.08), transparent 40%);
-    opacity: 0.6;
-    transition: opacity 0.3s ease;
-    z-index: 0;
-  }
-
-  &:hover {
-    color: $primary !important;
-    border-color: $primary !important;
-    transform: translateY(-3px);
-    border-color: rgba(45, 212, 191, 0.5); // Brighter on hover
-    box-shadow: 0 10px 30px -10px rgba($primary, 0.15);
-
-    &::before {
-      opacity: 1;
-    }
-  }
-
-  > * {
-    position: relative;
-    z-index: 1;
-  }
-} */
 
 .hero-btn {
   @extend %glass-card;
@@ -356,6 +331,65 @@ body {
   100% {
     transform: translateX(-100%);
   }
+}
+
+// ### PROJECTS ###
+.bg-dark-glass {
+  background: rgba($dark, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  &:hover {
+    background: rgba($primary, 0.1);
+    border-color: $primary;
+    color: white !important;
+  }
+}
+
+.project-image-container {
+  @extend %glass-card;
+  padding: 1.5rem;
+  aspect-ratio: 16 / 9;
+  height: auto;
+
+  @media (min-width: 992px) and (max-width: 1199px) {
+    max-width: 80%;
+    margin: 0 auto;
+    aspect-ratio: 16/9;
+  }
+
+  @media (min-width: 1200px) {
+    aspect-ratio: auto;
+  }
+
+  img {
+    transition: transform 0.5s ease;
+    will-change: transform; // Hint to browser for smoother animation
+    backface-visibility: hidden; // Prevents blurriness on scale
+    -webkit-backface-visibility: hidden;
+    transform: translateZ(0); // Hardware acceleration
+  }
+
+  &:hover {
+    transform: none;
+    box-shadow: 0 10px 30px -10px rgba($primary, 0.2);
+    border-color: rgba($primary, 0.5);
+
+    img {
+      transform: scale(1.05);
+    }
+  }
+}
+
+.project-img-custom {
+  object-fit: contain;
+  object-position: center;
+  width: 100%;
+  height: 100%;
+}
+
+.projects-gap {
+  gap: clamp(5rem, 8vw, 10rem);
 }
 
 // ### SCROLLBAR ###
