@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
 import { motion, type Variants } from "framer-motion";
-import { fadeIn } from "../utils/motion"; // Removed unused 'staggerContainer' import
+import { fadeIn } from "../utils/motion";
 
 const Hero = () => {
   const [mousePos, setMousePos] = useState({ x: "50%", y: "50%" });

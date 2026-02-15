@@ -1,5 +1,5 @@
 import { motion, type Variants } from "framer-motion";
-import { fadeIn, textVariant, staggerContainer } from "../utils/motion";
+import { fadeIn, textVariant } from "../utils/motion";
 
 type Tech = {
   name: string;
@@ -39,7 +39,13 @@ const TechStack = () => {
   // Double the array to ensure the track is long enough for the animation loop
   const trackItems = [...techs, ...techs];
 
-  const containerVariants: Variants = staggerContainer();
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: { duration: 0.1 }
+    }
+  };
   const headerVariants: Variants = textVariant(0.1);
   const titleVariants: Variants = textVariant(0.2);
   const descriptionVariants: Variants = fadeIn("", "tween", 0.1, 1);

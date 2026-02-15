@@ -1,9 +1,15 @@
 import { FaLaptopCode, FaLayerGroup, FaRocket } from "react-icons/fa";
 import { motion, type Variants } from "framer-motion";
-import { fadeIn, staggerContainer, textVariant } from "../utils/motion";
+import { fadeIn, textVariant } from "../utils/motion";
 
 const About = () => {
-  const containerVariants: Variants = staggerContainer();
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: { duration: 0.1 }
+    }
+  };
   const headerVariants: Variants = textVariant(0.1);
   const subHeaderVariants: Variants = textVariant(0.2);
   const descriptionVariants: Variants = fadeIn("", "tween", 0.1, 1);
