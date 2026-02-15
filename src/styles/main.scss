@@ -147,7 +147,11 @@ body {
 
   &:hover {
     color: $primary !important;
-    transform: translateY(-3px);
+    transform: translateY(-3px) scale(1.1);
+  }
+
+  &:active {
+    transform: translateY(0) scale(0.95);
   }
 }
 

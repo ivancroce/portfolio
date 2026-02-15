@@ -1,10 +1,14 @@
 import { useState } from "react";
 import { FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
-import { motion, type Variants } from "framer-motion";
+import { motion, useScroll, useTransform, type Variants } from "framer-motion";
 import { fadeIn } from "../utils/motion";
 
 const Hero = () => {
   const [mousePos, setMousePos] = useState({ x: "50%", y: "50%" });
+
+  const { scrollY } = useScroll();
+  // When scroll is 0px, opacity is 1. When scroll hits 200px, opacity is 0.
+  const scrollOpacity = useTransform(scrollY, [0, 200], [1, 0]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -58,7 +62,12 @@ const Hero = () => {
         </motion.p>
 
         <motion.div variants={iconsContainerVariants} className="d-flex justify-content-center mb-5 gap-3">
-          <a href="https://github.com/ivancroce" target="_blank" className="hero-btn rounded-circle p-3 text-white text-decoration-none">
+          <a
+            href="https://github.com/ivancroce"
+            target="_blank"
+            className="hero-btn rounded-circle p-3 text-white text-decoration-none"
+            aria-label="GitHub Profile"
+          >
             <FaGithub size={24} />
           </a>
           <a
@@ -66,10 +75,16 @@ const Hero = () => {
             target="_blank"
             rel="noopener noreferrer"
             className="hero-btn rounded-circle p-3 text-white text-decoration-none"
+            aria-label="LinkedIn Profile"
           >
             <FaLinkedin size={24} />
           </a>
-          <a href="mailto:ivan.croce.it@gmail.com" rel="noopener noreferrer" className="hero-btn rounded-circle p-3 text-white text-decoration-none">
+          <a
+            href="mailto:ivan.croce.it@gmail.com"
+            rel="noopener noreferrer"
+            className="hero-btn rounded-circle p-3 text-white text-decoration-none"
+            aria-label="Send Email"
+          >
             <FaEnvelope size={24} />
           </a>
         </motion.div>
@@ -80,6 +95,7 @@ const Hero = () => {
         variants={scrollButtonVariants}
         initial="hidden"
         animate="show"
+        style={{ opacity: scrollOpacity }}
         className="bg-transparent border-0 position-absolute bottom-0 start-50 translate-middle-x mb-5 z-2 p-0"
         onClick={handleScroll}
         aria-label="Scroll to About section"
