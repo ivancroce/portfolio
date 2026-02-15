@@ -1,4 +1,6 @@
+import { motion, type Variants } from "framer-motion";
 import { FaExternalLinkAlt, FaGithub } from "react-icons/fa";
+import { fadeIn, textVariant } from "../utils/motion";
 
 const projects = [
   {
@@ -49,22 +51,47 @@ const projects = [
 ];
 
 const Projects = () => {
+  const headerVariants: Variants = textVariant(0.1);
+  const titleVariants: Variants = textVariant(0.2);
+  const descriptionVariants: Variants = fadeIn("", "tween", 0.1, 1);
+  const projectCardVariants: Variants = fadeIn("up", "tween", 0.2, 1);
+  const btnContainerVariants: Variants = fadeIn("up", "tween", 0.5, 1);
+
   return (
     <section className="py-5 overflow-hidden" id="projects">
       <div className="container py-5">
         <div className="text-center mb-5">
-          <h6 className="text-primary text-uppercase letter-spacing-2 mb-2">Portfolio</h6>
-          <h2 className="display-4 fw-bold">Featured Projects</h2>
-          <p className="text-secondary mt-3">A selection of technical solutions focused on scalability, performance, and user experience.</p>
+          <motion.h6
+            variants={headerVariants}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.1 }}
+            className="text-primary text-uppercase letter-spacing-2 mb-2"
+          >
+            Portfolio
+          </motion.h6>
+          <motion.h2 variants={titleVariants} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.1 }} className="display-4 fw-bold">
+            Featured Projects
+          </motion.h2>
+          <motion.p variants={descriptionVariants} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.1 }} className="text-secondary mt-3">
+            A selection of technical solutions focused on scalability, performance, and user experience.
+          </motion.p>
         </div>
 
         <div className="d-flex flex-column projects-gap">
           {projects.map((project, index) => (
-            <div key={index} className="row g-5">
+            <motion.div
+              variants={projectCardVariants}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.1 }}
+              key={index}
+              className="row g-5"
+            >
               {/* Image Column */}
               <div className={`col-xl-6 ${index % 2 !== 0 ? "order-xl-2" : "order-xl-1"}`}>
                 <div className="project-image-container rounded-3 overflow-hidden position-relative h-100">
-                  <a href={project.links.live || project.links.github} target="_blank" rel="noopener_noreferrer" className="d-block w-100 h-100">
+                  <a href={project.links.live || project.links.github} target="_blank" rel="noopener noreferrer" className="d-block w-100 h-100">
                     <img src={project.image} alt={project.title} className="project-img-custom" />
                   </a>
                 </div>
@@ -76,7 +103,9 @@ const Projects = () => {
                   <span className="text-primary fs-5">===</span>
                   <div className="d-flex align-items-center gap-3">
                     {project.links.github ? (
-                      <a
+                      <motion.a
+                        whileHover={{ scale: 1.2 }}
+                        transition={{ duration: 0.2 }}
                         href={project.links.github}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -85,7 +114,7 @@ const Projects = () => {
                         title="View Source Code"
                       >
                         <FaGithub size={24} />
-                      </a>
+                      </motion.a>
                     ) : (
                       <span className="text-secondary opacity-25 cursor-not-allowed" title="Private Repository">
                         <FaGithub size={24} />
@@ -95,7 +124,9 @@ const Projects = () => {
                     <span className="text-primary fs-5">|</span>
 
                     {project.links.live ? (
-                      <a
+                      <motion.a
+                        whileHover={{ scale: 1.2 }}
+                        transition={{ duration: 0.2 }}
                         href={project.links.live}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -104,7 +135,7 @@ const Projects = () => {
                         title="View Live Site"
                       >
                         <FaExternalLinkAlt size={22} />
-                      </a>
+                      </motion.a>
                     ) : (
                       <span className="text-secondary opacity-25 cursor-not-allowed" title="Not Deployed">
                         <FaExternalLinkAlt size={24} />
@@ -134,21 +165,22 @@ const Projects = () => {
                   ))}
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
-        <div className="text-center mt-5 pt-5">
+
+        <motion.div variants={btnContainerVariants} initial="hidden" whileInView="show" viewport={{ once: true }} className="text-center mt-5 pt-5">
           <p className="text-secondary mb-4">Interested in seeing more? Check out my GitHub</p>
           <a
             href="https://github.com/ivancroce"
             target="_blank"
-            rel="noopener_noreferrer"
+            rel="noopener noreferrer"
             className="btn btn-outline-primary rounded-pill px-5 py-3 hover-effect text-uppercase letter-spacing-2 text-decoration-none d-inline-flex align-items-center gap-2"
           >
             <span>More Projects</span>
             <FaGithub size={20} />
           </a>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
