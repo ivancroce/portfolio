@@ -16,7 +16,7 @@ const projects = [
     ],
     tech: ["React", "Next.js", "TypeScript", "SEO", "Performance Optimization"],
     links: { live: "https://www.halohealth.ch/" },
-    image: "/projects/halo-project2.png"
+    image: "/projects/halo-project2.webp"
   },
   {
     title: "EduAtlas & WU",
@@ -31,7 +31,7 @@ const projects = [
     ],
     tech: ["React", "Sass", "Bootstrap", "Java", "Spring Boot", "PostgreSQL", "JWT"],
     links: { github: "https://github.com/ivancroce/eduatlas-affinity-report", live: "https://eduatlas-affinity-report.netlify.app" },
-    image: "/projects/eduatlas-project.png"
+    image: "/projects/eduatlas-project.webp"
   },
   {
     title: "Epic Energy",
@@ -46,7 +46,7 @@ const projects = [
     ],
     tech: ["Java", "Spring Boot", "PostgreSQL", "JPA Specifications", "JWT", "React"],
     links: { github: "http://github.com/ivancroce/bw5-fullstack-epic-energy-app", live: "" },
-    image: "/projects/epic-project.png"
+    image: "/projects/epic-project.webp"
   }
 ];
 
