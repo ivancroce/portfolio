@@ -34,6 +34,10 @@ body {
   line-height: 1.7;
 }
 
+.mw-600 {
+  max-width: 600px;
+}
+
 .hover-effect {
   transition:
     transform 0.3s ease,
@@ -401,6 +405,27 @@ body {
 
 .projects-gap {
   gap: clamp(5rem, 8vw, 10rem);
+}
+
+// ### CONTACT ###
+.contact-card {
+  @extend %glass-card;
+
+  .icon-transition,
+  h5 {
+    color: #fff;
+    transition: color 0.3s ease;
+  }
+
+  &:hover {
+    .icon-transition {
+      color: $primary;
+    }
+
+    h5 {
+      color: $primary;
+    }
+  }
 }
 
 // ### SCROLLBAR ###

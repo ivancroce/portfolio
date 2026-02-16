@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaEnvelope, FaFilePdf, FaGithub, FaLinkedin } from "react-icons/fa";
 import { motion, useScroll, useTransform, type Variants } from "framer-motion";
 import { fadeIn } from "../utils/motion";
 
@@ -86,6 +86,14 @@ const Hero = () => {
             aria-label="Send Email"
           >
             <FaEnvelope size={24} />
+          </a>
+          <a
+            href="/IvanCroce_CV_Public.pdf"
+            download="IvanCroce_CV_Public.pdf"
+            className="hero-btn rounded-circle p-3 text-white text-decoration-none"
+            title="Download CV"
+          >
+            <FaFilePdf size={24} />
           </a>
         </motion.div>
       </motion.div>
