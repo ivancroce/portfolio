@@ -109,7 +109,7 @@ const Projects = () => {
                         href={project.links.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-light hover-primary"
+                        className="text-light hover-primary project-icon-link"
                         aria-label="GitHub"
                         title="View Source Code"
                       >
@@ -130,7 +130,7 @@ const Projects = () => {
                         href={project.links.live}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-light hover-primary"
+                        className="text-light hover-primary project-icon-link"
                         aria-label="Live"
                         title="View Live Site"
                       >
