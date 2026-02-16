@@ -58,7 +58,7 @@ const Hero = () => {
         </div>
 
         <motion.p variants={descriptionVariants} className="lead text-secondary mx-auto mb-5">
-          Junior Full Stack Developer passionate about building web applications.
+          Software Developer passionate about building scalable web applications.
         </motion.p>
 
         <motion.div variants={iconsContainerVariants} className="d-flex justify-content-center mb-5 gap-3">

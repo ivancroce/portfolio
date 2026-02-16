@@ -1,4 +1,4 @@
-import { FaLaptopCode, FaLayerGroup, FaRocket } from "react-icons/fa";
+import { FaLaptopCode, FaLayerGroup, FaUsers } from "react-icons/fa";
 import { motion, type Variants } from "framer-motion";
 import { fadeIn, textVariant } from "../utils/motion";
 
@@ -26,8 +26,8 @@ const About = () => {
             About Me
           </motion.h6>
           <motion.h2 variants={subHeaderVariants} className="display-5 fw-bold">
-            Passionate about building meaningful <br />
-            <span className="text-primary">digital experiences</span>
+            Dedicated to building clean, <br />
+            <span className="text-primary">efficient applications</span>
           </motion.h2>
         </div>
         <motion.div variants={descriptionVariants} className="row justify-content-center mb-5">
@@ -35,20 +35,22 @@ const About = () => {
             <div className="card gradient-card p-4 mb-4">
               <div className="card-body text-secondary">
                 <p className="lead text-secondary mb-4">
-                  I'm a <span className="text-white fw-semibold">Full Stack Developer</span> driven by curiosity, creativity, and a love for solving real-world
-                  problems. I enjoy transforming ideas into clean, efficient, and user-focused applications.
+                  I'm a <span className="text-white fw-semibold">Junior Full Stack Developer</span> building responsive web apps with
+                  <span className="text-primary"> React and TypeScript </span> for the frontend and <span className="text-primary">Java with Spring Boot </span>
+                  for the backend, constantly learning best practices along the way.
                 </p>
+
                 <p className="lead text-secondary">
-                  I’ve gained hands-on experience working with modern technologies across both frontend and backend, and I’m constantly improving my skills
-                  through projects, experimentation, and continuous learning. My goal is simple: build things that matter and keep getting better every day.
+                  I'm looking for a team that values clean code and continuous improvement, where I can contribute to real-world projects while growing
+                  alongside experienced developers.
                 </p>
               </div>
             </div>
           </div>
         </motion.div>
         <div className="row g-4 text-center">
-          <motion.div variants={card1Variants} className="col-md-4">
-            <div className="card gradient-card h-100 p-4 hover-effect">
+          <motion.div variants={card1Variants} className="col-lg-4">
+            <div className="card gradient-card about-card h-100 p-4 hover-effect">
               <div className="card-body">
                 <div className="text-primary display-6 mb-3">
                   <FaLayerGroup />
@@ -60,28 +62,28 @@ const About = () => {
               </div>
             </div>
           </motion.div>
-          <motion.div variants={card2Variants} className="col-md-4">
-            <div className="card gradient-card h-100 p-4 hover-effect">
+          <motion.div variants={card2Variants} className="col-lg-4">
+            <div className="card gradient-card about-card h-100 p-4 hover-effect">
               <div className="card-body">
                 <div className="text-primary display-6 mb-3">
                   <FaLaptopCode />
                 </div>
-                <h5>Committed Creator</h5>
+                <h5>Problem Solver</h5>
                 <p className="text-secondary small mb-0">
-                  Building the web with passion. I connect backend logic with clean, intuitive interfaces to create seamless user journeys.
+                  I enjoy the logic behind the code. I approach bugs with patience and don't stop until I find a clean, working solution.
                 </p>
               </div>
             </div>
           </motion.div>
-          <motion.div variants={card3Variants} className="col-md-4">
-            <div className="card gradient-card h-100 p-4 hover-effect">
+          <motion.div variants={card3Variants} className="col-lg-4">
+            <div className="card gradient-card about-card h-100 p-4 hover-effect">
               <div className="card-body">
                 <div className="text-primary display-6 mb-3">
-                  <FaRocket />
+                  <FaUsers />
                 </div>
-                <h5>Future-Ready</h5>
+                <h5>Team-Ready</h5>
                 <p className="text-secondary small mb-0">
-                  Ready to build and launch new ideas. I bring fresh perspective, energy, and a strong drive to contribute from day one.
+                  Communicative, collaborative, and always open to feedback. I am eager to join a team and ready to contribute to real-world projects.
                 </p>
               </div>
             </div>

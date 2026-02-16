@@ -68,10 +68,10 @@ const Projects = () => {
             viewport={{ once: true, amount: 0.1 }}
             className="text-primary text-uppercase letter-spacing-2 mb-2"
           >
-            Portfolio
+            Projects
           </motion.h6>
           <motion.h2 variants={titleVariants} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.1 }} className="display-4 fw-bold">
-            Featured Projects
+            Selected Work
           </motion.h2>
           <motion.p variants={descriptionVariants} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.1 }} className="text-secondary mt-3">
             A selection of technical solutions focused on scalability, performance, and user experience.
