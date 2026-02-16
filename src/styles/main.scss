@@ -167,10 +167,10 @@ body {
   position: relative;
   width: var(--sizeX);
   height: var(--sizeY);
-  border: calc(var(--sizeX) / 10) solid var(--color);
+  border: 2px solid var(--color);
   border-radius: 50px;
   box-sizing: border-box;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
   cursor: pointer;
 
   // Neon glow effect for the border
@@ -216,9 +216,8 @@ body {
 
 .chevrons {
   padding: 6px 0 0 0;
-  margin-left: -3px;
   margin-top: 48px;
-  width: 30px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -228,7 +227,7 @@ body {
   margin-top: -6px;
   position: relative;
   border: solid var(--color);
-  border-width: 0 3px 3px 0;
+  border-width: 0 2px 2px 0;
   display: inline-block;
   width: 10px;
   height: 10px;
