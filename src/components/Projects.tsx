@@ -121,7 +121,7 @@ const Projects = () => {
                       </span>
                     )}
 
-                    <span className="text-primary fs-5">|</span>
+                    <div className="vertical-divider"></div>
 
                     {project.links.live ? (
                       <motion.a

@@ -444,6 +444,14 @@ body {
   }
 }
 
+.vertical-divider {
+  display: inline-block;
+  background-color: $primary;
+  width: 2px;
+  height: 24px;
+  border-radius: 1px;
+}
+
 // ### CONTACT ###
 .contact-card {
   @extend %glass-card;
