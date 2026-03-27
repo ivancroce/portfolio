@@ -1,10 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaEnvelope, FaFilePdf, FaGithub, FaLinkedin } from "react-icons/fa";
 import { motion, useScroll, useTransform, type Variants } from "framer-motion";
 import { fadeIn } from "../utils/motion";
+import InkEffect from "./InkEffect";
 
 const Hero = () => {
   const [mousePos, setMousePos] = useState({ x: "50%", y: "50%" });
+  const [isLight, setIsLight] = useState(() => (localStorage.getItem("theme") ?? "light") === "light");
+
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      setIsLight(document.documentElement.getAttribute("data-theme") === "light");
+    });
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"]
+    });
+    return () => observer.disconnect();
+  }, []);
 
   const { scrollY } = useScroll();
   // When scroll is 0px, opacity is 1. When scroll hits 200px, opacity is 0.
@@ -43,8 +56,14 @@ const Hero = () => {
       style={{ "--mouse-x": mousePos.x, "--mouse-y": mousePos.y } as React.CSSProperties}
     >
       {/* Background Effects */}
-      <div className="hero-background"></div>
-      <div className="hero-glow"></div>
+      {isLight ? (
+        <InkEffect />
+      ) : (
+        <>
+          <div className="hero-background"></div>
+          <div className="hero-glow"></div>
+        </>
+      )}
 
       <motion.div className="container position-relative z-1" variants={heroContainerVariants} initial="hidden" animate="show">
         <div className="mb-4">
@@ -108,12 +127,14 @@ const Hero = () => {
         onClick={handleScroll}
         aria-label="Scroll to About section"
       >
-        <div className="scrolldown">
-          <div className="chevrons">
-            <div className="chevrondown"></div>
-            <div className="chevrondown"></div>
+        <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 1.4, ease: "easeInOut", repeat: Infinity }}>
+          <div className="scrolldown">
+            <div className="chevrons">
+              <div className="chevrondown"></div>
+              <div className="chevrondown"></div>
+            </div>
           </div>
-        </div>
+        </motion.div>
       </motion.button>
     </section>
   );
