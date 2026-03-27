@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { FaEnvelope, FaFilePdf, FaGithub, FaLinkedin } from "react-icons/fa";
 import { motion, useScroll, useTransform, type Variants } from "framer-motion";
 import { fadeIn } from "../utils/motion";
 import InkEffect from "./InkEffect";
 
 const Hero = () => {
-  const [mousePos, setMousePos] = useState({ x: "50%", y: "50%" });
+  const sectionRef = useRef<HTMLElement>(null);
   const [isLight, setIsLight] = useState(() => (localStorage.getItem("theme") ?? "light") === "light");
 
   useEffect(() => {
@@ -24,10 +24,12 @@ const Hero = () => {
   const scrollOpacity = useTransform(scrollY, [0, 200], [1, 0]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    if (isLight || !sectionRef.current) return;
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    setMousePos({ x: `${x}px`, y: `${y}px` });
+    sectionRef.current.style.setProperty("--mouse-x", `${x}px`);
+    sectionRef.current.style.setProperty("--mouse-y", `${y}px`);
   };
 
   const handleScroll = () => {
@@ -51,9 +53,9 @@ const Hero = () => {
 
   return (
     <section
+      ref={sectionRef}
       className="vh-100 hero-section d-flex flex-column align-items-center justify-content-center text-center position-relative overflow-hidden"
       onMouseMove={handleMouseMove}
-      style={{ "--mouse-x": mousePos.x, "--mouse-y": mousePos.y } as React.CSSProperties}
     >
       {/* Background Effects */}
       {isLight ? (
@@ -69,8 +71,33 @@ const Hero = () => {
         <div className="mb-4">
           <h1 className="display-1 fw-bold text-neon d-flex justify-content-center flex-wrap gap-2">
             {Array.from("IVAN CROCE").map((letter, i) => (
-              <motion.span key={i} variants={getLetterVariant(i)} className="d-inline-block">
-                {letter === " " ? "\u00A0" : letter}
+              <motion.span
+                key={i}
+                variants={getLetterVariant(i)}
+                className={`d-inline-block ${isLight ? "position-relative letter-outline-wrapper" : ""}`}
+                style={isLight ? { "--anim-delay": `${i * 0.2 + 0.2}s` } as React.CSSProperties : {}}
+              >
+                {isLight && letter !== " " ? (
+                  <>
+                    <span style={{ visibility: "hidden" }}>{letter}</span>
+                    <svg
+                      className="position-absolute top-0 start-0 w-100 h-100"
+                      style={{ overflow: "visible" }}
+                    >
+                      <text
+                        x="50%"
+                        y="50%"
+                        dominantBaseline="central"
+                        textAnchor="middle"
+                        className="outline-text"
+                      >
+                        {letter}
+                      </text>
+                    </svg>
+                  </>
+                ) : (
+                  letter === " " ? "\u00A0" : letter
+                )}
               </motion.span>
             ))}
           </h1>

@@ -553,6 +553,41 @@ body {
     text-shadow: none;
   }
 
+  // SVG Outline drawing effect for Hero title
+  .outline-text {
+    --draw-duration: 2.5s;
+    --fill-duration: 0.5s;
+    --fill-delay: 3.0s; /* Waits until the last letter is completely drawn before filling ALL letters */
+
+    fill: transparent;
+    stroke: var(--neon-color);
+    stroke-width: 2px;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    paint-order: stroke fill;
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    
+    animation: 
+      drawLetter var(--draw-duration) ease-in-out forwards var(--anim-delay, 0s), 
+      fillLetter var(--fill-duration) ease-in forwards var(--fill-delay);
+    font-size: inherit;
+    font-family: inherit;
+    font-weight: inherit;
+  }
+
+  @keyframes drawLetter {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes fillLetter {
+    to {
+      fill: var(--neon-color);
+    }
+  }
+
   // Bootstrap primary text — runtime colour
   .text-primary {
     color: var(--primary) !important;
