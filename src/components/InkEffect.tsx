@@ -247,6 +247,12 @@ const CURL_STR = 0.8; // vorticity confinement strength
 const GAIN = 2.2; // display brightness multiplier
 const DYE_INT = 0.12; // dye intensity per splat
 
+// ── Mouse-input tuning ──────────────────────────────────────────────
+const M_FORCE = 2000; // mouse velocity multiplier (vs 3000 for auto)
+const M_DYE_INT = 0.12; // mouse dye intensity (matches auto)
+const M_MAX_D = 0.012; // max per-frame delta component for mouse
+const M_SMOOTH = 0.5; // EMA smoothing factor (0 = full smooth, 1 = none)
+
 const INK_CLR = [0.455, 0.62, 0.604] as const; // ink colour (#749E9A)
 
 // ── Auto-animation ───────────────────────────────────────────────────
@@ -364,7 +370,10 @@ const InkEffect = () => {
       gl.drawArrays(gl.TRIANGLE_FAN, 0, 4);
     };
 
-    const splat = (x: number, y: number, dx: number, dy: number) => {
+    const splat = (
+      x: number, y: number, dx: number, dy: number,
+      force = S_FORCE, intensity = DYE_INT
+    ) => {
       const ar = el.width / el.height;
       gl.useProgram(pSplat.p);
       gl.uniform1f(pSplat.u["u_ar"], ar);
@@ -373,13 +382,13 @@ const InkEffect = () => {
 
       // Velocity splat
       gl.uniform1i(pSplat.u["u_tgt"], vel.read.bind(0));
-      gl.uniform3f(pSplat.u["u_clr"], dx * S_FORCE, dy * S_FORCE, 0);
+      gl.uniform3f(pSplat.u["u_clr"], dx * force, dy * force, 0);
       blit(vel.write);
       vel.swap();
 
       // Dye splat (uniform grayscale)
       gl.uniform1i(pSplat.u["u_tgt"], dye.read.bind(0));
-      gl.uniform3f(pSplat.u["u_clr"], DYE_INT, DYE_INT, DYE_INT);
+      gl.uniform3f(pSplat.u["u_clr"], intensity, intensity, intensity);
       blit(dye.write);
       dye.swap();
     };
@@ -462,6 +471,18 @@ const InkEffect = () => {
       blit(null);
     };
 
+    // ── Pointer state (declared before loop so loop can access them) ──
+
+    let lx = 0,
+      ly = 0,
+      has = false;
+    let accDx = 0,
+      accDy = 0;
+    let lastPtrX = 0,
+      lastPtrY = 0;
+    let smoothDx = 0,
+      smoothDy = 0;
+
     // ── Animation loop ──
 
     let last = performance.now();
@@ -470,12 +491,21 @@ const InkEffect = () => {
       const dt = Math.min((now - last) / 1000, 0.02);
       last = now;
 
-      // Real pointer input
+      // Real pointer input (clamped + smoothed)
       if (ptrRef.current.moved) {
         autoRef.current.lastInput = now;
         autoRef.current.wasActive = true;
-        splat(ptrRef.current.x, ptrRef.current.y, ptrRef.current.dx, ptrRef.current.dy);
+        const mdx = Math.max(-M_MAX_D, Math.min(M_MAX_D, accDx));
+        const mdy = Math.max(-M_MAX_D, Math.min(M_MAX_D, accDy));
+        smoothDx += (mdx - smoothDx) * M_SMOOTH;
+        smoothDy += (mdy - smoothDy) * M_SMOOTH;
+        splat(lastPtrX, lastPtrY, smoothDx, smoothDy, M_FORCE, M_DYE_INT);
         ptrRef.current.moved = false;
+        accDx = 0;
+        accDy = 0;
+      } else {
+        smoothDx *= 0.9;
+        smoothDy *= 0.9;
       }
 
       // Auto-animation: gentle sweep strokes when idle
@@ -558,21 +588,28 @@ const InkEffect = () => {
     // ── Pointer tracking ──
 
     const sec = el.parentElement;
-    let lx = 0,
-      ly = 0,
-      has = false;
 
     const onPtr = (e: PointerEvent) => {
       const r = el.getBoundingClientRect();
       const x = (e.clientX - r.left) / r.width;
       const y = 1 - (e.clientY - r.top) / r.height;
-      if (has) ptrRef.current = { x, y, dx: x - lx, dy: y - ly, moved: true };
+      if (has) {
+        accDx += x - lx;
+        accDy += y - ly;
+        lastPtrX = x;
+        lastPtrY = y;
+        ptrRef.current.moved = true;
+      }
       lx = x;
       ly = y;
       has = true;
     };
     const onLeave = () => {
       has = false;
+      smoothDx = 0;
+      smoothDy = 0;
+      accDx = 0;
+      accDy = 0;
     };
 
     sec?.addEventListener("pointermove", onPtr);
