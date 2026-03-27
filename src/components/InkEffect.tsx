@@ -239,7 +239,7 @@ function mkDFBO(gl: GL, w: number, h: number, type: number, filter: number): DFB
 const SIM_RES = 128; // velocity/pressure grid resolution
 const DYE_RES = 1024; // dye texture resolution (higher = sharper ink)
 const P_ITER = 20; // Jacobi pressure-solve iterations
-const D_DISS = 0.8; // dye dissipation rate (higher = faster fade)
+const D_DISS = 1.3; // dye dissipation rate (higher = faster fade)
 const V_DISS = 0.4; // velocity dissipation (lower = more viscous flow)
 const S_RAD = 0.003; // splat radius (Gaussian spread)
 const S_FORCE = 3000; // velocity multiplier per splat
@@ -257,7 +257,7 @@ const INK_CLR = [0.455, 0.62, 0.604] as const; // ink colour (#749E9A)
 
 const AUTO_IDLE = 1000; // ms of inactivity before auto-animation starts
 const AUTO_STROKE_MS = 5000; // duration of each sweep stroke
-const AUTO_PAUSE_MS = 2500; // pause between strokes for ink to dissolve
+const AUTO_PAUSE_MS = 1000; // pause between strokes for ink to dissolve
 
 // ── Component ───────────────────────────────────────────────────────────
 // Renders a full-screen <canvas> overlay. All WebGL resources are created
