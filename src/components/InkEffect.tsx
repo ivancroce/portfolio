@@ -243,13 +243,13 @@ const D_DISS = 1.3; // dye dissipation rate (higher = faster fade)
 const V_DISS = 0.4; // velocity dissipation (lower = more viscous flow)
 const S_RAD = 0.003; // splat radius (Gaussian spread)
 const S_FORCE = 3000; // velocity multiplier per splat
-const CURL_STR = 0.8; // vorticity confinement strength
+const CURL_STR = 0.35; // vorticity confinement strength
 const GAIN = 2.2; // display brightness multiplier
 const DYE_INT = 0.12; // dye intensity per splat
 
 // ── Mouse-input tuning ──────────────────────────────────────────────
-const M_FORCE = 2000; // mouse velocity multiplier (vs 3000 for auto)
-const M_DYE_INT = 0.12; // mouse dye intensity (matches auto)
+const M_FORCE = 1500; // mouse velocity multiplier (lower = wake clears faster)
+const M_DYE_INT = 0.15; // mouse dye intensity (lighter to avoid accumulation)
 const M_MAX_D = 0.012; // max per-frame delta component for mouse
 const M_SMOOTH = 0.5; // EMA smoothing factor (0 = full smooth, 1 = none)
 
@@ -370,10 +370,7 @@ const InkEffect = () => {
       gl.drawArrays(gl.TRIANGLE_FAN, 0, 4);
     };
 
-    const splat = (
-      x: number, y: number, dx: number, dy: number,
-      force = S_FORCE, intensity = DYE_INT
-    ) => {
+    const splat = (x: number, y: number, dx: number, dy: number, force = S_FORCE, intensity = DYE_INT) => {
       const ar = el.width / el.height;
       gl.useProgram(pSplat.p);
       gl.uniform1f(pSplat.u["u_ar"], ar);
@@ -544,7 +541,7 @@ const InkEffect = () => {
             a.tx = r2;
             a.ty = 1.02;
           }
-          a.ctrl = (Math.random() - 0.5) * 0.3;
+          a.ctrl = (Math.random() - 0.5) * 0.12;
           a.cx = a.sx;
           a.cy = a.sy;
           a.phaseStart = now;
