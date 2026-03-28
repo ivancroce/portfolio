@@ -175,7 +175,7 @@ const Projects = () => {
             href="https://github.com/ivancroce"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn btn-outline-primary rounded-pill px-5 py-3 hover-effect text-uppercase letter-spacing-2 text-decoration-none d-inline-flex align-items-center gap-2"
+            className="btn btn-primary rounded-pill px-5 py-3 hover-effect text-uppercase letter-spacing-2 text-decoration-none d-inline-flex align-items-center gap-2"
           >
             <span>More Projects</span>
             <FaGithub size={20} />

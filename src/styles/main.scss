@@ -602,6 +602,11 @@ body {
     color: #28383e !important;
   }
 
+  // Ensure hover-primary beats the .text-secondary !important override above
+  .hover-primary:hover {
+    color: var(--primary) !important;
+  }
+
   // text-white / text-light → dark in light mode
   .text-white {
     color: #28383e !important;
@@ -628,36 +633,66 @@ body {
     }
   }
 
+  // Filled primary button — starts filled, darkens on hover
+  .btn-primary {
+    --bs-btn-bg: var(--primary);
+    --bs-btn-border-color: var(--primary);
+    --bs-btn-hover-bg: #5e8480;
+    --bs-btn-hover-border-color: #5e8480;
+    --bs-btn-active-bg: #5e8480;
+    --bs-btn-active-border-color: #5e8480;
+    --bs-btn-focus-box-shadow: none;
+    --bs-btn-color: #fff;
+    --bs-btn-hover-color: #fff;
+    color: #fff !important;
+  }
+
   // ── Neobrutalist diagonal shadow ─────────────────────────────────────────
   // Solid offset shadow (no blur), element shifts into/out of it on interaction
 
-  // Glass cards — project images, about cards, contact cards
-  .gradient-card,
-  .contact-card {
+  // Glass cards — project images, about cards
+  .gradient-card {
     border-color: rgba(40, 56, 62, 0.2) !important;
     box-shadow: 4px 4px 0 rgba(40, 56, 62, 0.72) !important;
 
     &:hover {
       transform: translate(-1px, -1px) !important;
       border-color: rgba(116, 158, 154, 0.45) !important;
-      // Keep shadow size fixed — visual shift comes from translate, not shadow growth
       box-shadow: 4px 4px 0 rgba(40, 56, 62, 0.72) !important;
+    }
+  }
+
+  // Contact cards — single consolidated rule to avoid
+  // conflicting transitions from .hover-effect (0.3s) vs %glass-card (0.5s)
+  .contact-card {
+    border-color: rgba(40, 56, 62, 0.2) !important;
+    box-shadow: 4px 4px 0 rgba(40, 56, 62, 0.72) !important;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    will-change: transform;
+
+    &:hover {
+      transform: translate(-1px, -1px) translateZ(0) !important;
+      border-color: rgba(116, 158, 154, 0.45) !important;
+      box-shadow: 4px 4px 0 rgba(40, 56, 62, 0.72) !important;
+    }
+
+    &:active {
+      transform: translate(2px, 2px) translateZ(0) !important;
+      box-shadow: 2px 2px 0 rgba(40, 56, 62, 0.72) !important;
     }
   }
 
   // About cards — light mode only fixes
   .about-card {
-    // Solid pastel bg makes backdrop-filter pointless; disabling it eliminates
-    // the blurry repaint that occurs when the GPU recomposites the blur on transform
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
 
-    // No movement on hover — static cards
     &:hover {
       transform: none !important;
     }
 
-    // Icons use the same dark colour as the hero h1
     .text-primary {
       color: #28383e !important;
     }
@@ -698,8 +733,8 @@ body {
     box-shadow: 4px 4px 0 rgba(40, 56, 62, 0.72) !important;
 
     &:hover {
-      transform: none !important; // No card movement — only the icon inside scales
-      box-shadow: 4px 4px 0 rgba(40, 56, 62, 0.72) !important; // Keep shadow at 4px
+      transform: none !important;
+      box-shadow: 4px 4px 0 rgba(40, 56, 62, 0.72) !important;
     }
   }
 
@@ -708,10 +743,23 @@ body {
     box-shadow: 4px 4px 0 rgba(40, 56, 62, 0.72) !important;
 
     &:hover {
-      transform: translate(-1px, -1px) !important;
+      transform: none !important;
       border-color: rgba(116, 158, 154, 0.45) !important;
-      box-shadow: 5px 5px 0 rgba(40, 56, 62, 0.72) !important;
+      box-shadow: 4px 4px 0 rgba(40, 56, 62, 0.72) !important;
     }
+  }
+
+  // Project cards — pastel backgrounds matching about-card-1/2/3
+  .projects-gap > div:nth-child(1) .project-image-container {
+    background: #bcd1ca !important;
+  }
+
+  .projects-gap > div:nth-child(2) .project-image-container {
+    background: #cbcadb !important;
+  }
+
+  .projects-gap > div:nth-child(3) .project-image-container {
+    background: #6a9bcc !important;
   }
 
   // Hover-effect class (About cards, Contact cards, GitHub button)
@@ -721,8 +769,7 @@ body {
 
     &:hover {
       transform: translate(-1px, -1px);
-      border-color: var(--primary) !important;
-      box-shadow: 5px 5px 0 rgba(40, 56, 62, 0.72);
+      box-shadow: 4px 4px 0 rgba(40, 56, 62, 0.72);
     }
 
     &:active {
@@ -750,12 +797,16 @@ body {
     }
   }
 
-  // Project icon links — dark default, primary on hover
+  // Project icon links — dark default, teal on hover
   .project-icon-link {
     color: #28383e !important;
+
+    &:hover {
+      color: var(--primary) !important;
+    }
   }
 
-  // Theme toggle — smaller diagonal shadow
+  // Theme toggle
   .theme-toggle {
     border-color: rgba(40, 56, 62, 0.18) !important;
     box-shadow: 3px 3px 0 rgba(40, 56, 62, 0.65) !important;
