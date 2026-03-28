@@ -22,7 +22,7 @@ const Contact = () => {
     <section className="pt-5 bg-darker overflow-hidden" id="contact">
       <motion.div variants={containerVariants} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.1 }} className="container pt-5">
         <div className="text-center mb-5">
-          <motion.h6 variants={headerVariants} className="text-primary text-uppercase letter-spacing-2 mb-2">
+          <motion.h6 variants={headerVariants} className="text-primary text-uppercase letter-spacing-2 mb-2 fw-semibold">
             Get In Touch
           </motion.h6>
           <motion.h2 variants={titleVariants} className="display-4 fw-bold">

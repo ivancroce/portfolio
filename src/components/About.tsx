@@ -22,7 +22,7 @@ const About = () => {
     <section className="py-5 overflow-hidden" id="about">
       <motion.div variants={containerVariants} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.1 }} className="container py-5">
         <div className="text-center mb-5">
-          <motion.h6 variants={headerVariants} className="text-primary text-uppercase letter-spacing-2 mb-2">
+          <motion.h6 variants={headerVariants} className="text-primary text-uppercase letter-spacing-2 mb-2 fw-semibold">
             About Me
           </motion.h6>
           <motion.h2 variants={subHeaderVariants} className="display-5 fw-bold">
@@ -32,7 +32,7 @@ const About = () => {
         </div>
         <motion.div variants={descriptionVariants} className="row justify-content-center mb-5">
           <div className="col-lg-8">
-            <div className="card gradient-card p-4 mb-4">
+            <div className="card gradient-card about-card-0 p-4 mb-4">
               <div className="card-body text-secondary">
                 <p className="lead text-secondary mb-4">
                   I'm a <span className="text-white fw-semibold">Junior Full Stack Developer</span> building responsive web apps with
@@ -50,12 +50,12 @@ const About = () => {
         </motion.div>
         <div className="row g-4 text-center">
           <motion.div variants={card1Variants} className="col-lg-4">
-            <div className="card gradient-card about-card h-100 p-4 hover-effect">
+            <div className="card gradient-card about-card about-card-1 h-100 p-4 hover-effect">
               <div className="card-body">
                 <div className="text-primary display-6 mb-3">
                   <FaLayerGroup />
                 </div>
-                <h5>Continuous Learner</h5>
+                <h5 className="fw-semibold">Continuous Learner</h5>
                 <p className="text-secondary small mb-0">
                   Constantly improving through practice. I explore new patterns and technologies to keep growing every day.
                 </p>
@@ -63,12 +63,12 @@ const About = () => {
             </div>
           </motion.div>
           <motion.div variants={card2Variants} className="col-lg-4">
-            <div className="card gradient-card about-card h-100 p-4 hover-effect">
+            <div className="card gradient-card about-card about-card-2 h-100 p-4 hover-effect">
               <div className="card-body">
                 <div className="text-primary display-6 mb-3">
                   <FaLaptopCode />
                 </div>
-                <h5>Problem Solver</h5>
+                <h5 className="fw-semibold">Problem Solver</h5>
                 <p className="text-secondary small mb-0">
                   I enjoy the logic behind the code. I approach bugs with patience and don't stop until I find a clean, working solution.
                 </p>
@@ -76,12 +76,12 @@ const About = () => {
             </div>
           </motion.div>
           <motion.div variants={card3Variants} className="col-lg-4">
-            <div className="card gradient-card about-card h-100 p-4 hover-effect">
+            <div className="card gradient-card about-card about-card-3 h-100 p-4 hover-effect">
               <div className="card-body">
                 <div className="text-primary display-6 mb-3">
                   <FaUsers />
                 </div>
-                <h5>Team-Ready</h5>
+                <h5 className="fw-semibold">Team-Ready</h5>
                 <p className="text-secondary small mb-0">
                   Communicative, collaborative, and always open to feedback. I am eager to join a team and ready to contribute to real-world projects.
                 </p>

@@ -31,8 +31,10 @@ const techs: Tech[] = [
   { name: "Postman", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg" },
   { name: "VS Code", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" },
   { name: "IntelliJ", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/intellij/intellij-original.svg" },
-  { name: "WordPress", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg", invert: true },
-  { name: "Canva", img: "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/canva.svg", invert: true }
+  { name: "WordPress", img: "/wordpress-logo.webp" },
+  { name: "Canva", img: "/canva-logo.webp" },
+  { name: "Claude", img: "/claude-logo.png" },
+  { name: "Antigravity", img: "/antigravity-logo.png" }
 ];
 
 const TechStack = () => {
@@ -66,7 +68,7 @@ const TechStack = () => {
     <section className="py-5 bg-darker overflow-hidden" id="tech-stack">
       <motion.div variants={containerVariants} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.1 }} className="container-fluid py-5">
         <div className="text-center mb-5">
-          <motion.h6 variants={headerVariants} className="text-primary text-uppercase letter-spacing-2 mb-2">
+          <motion.h6 variants={headerVariants} className="text-primary text-uppercase letter-spacing-2 mb-2 fw-semibold">
             Tech Stack
           </motion.h6>
           <motion.h2 variants={titleVariants} className="display-4 fw-bold">

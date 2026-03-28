@@ -1,5 +1,4 @@
 @use "variables" as *;
-
 @use "bootstrap/scss/bootstrap" with (
   $primary: $primary,
   $secondary: $secondary,
@@ -10,8 +9,59 @@
   $font-family-sans-serif: $font-family-sans-serif
 );
 
+// ─── CSS Custom Properties ───────────────────────────────────────────────────
+// Dark mode (default)
+:root {
+  --body-bg: #0f172a;
+  --body-bg-darker: #0c1220;
+  --body-color: #f8f9fa;
+  --primary: #20c997;
+  --primary-rgb: 32, 201, 151;
+  --glass-bg-start: rgba(15, 23, 42, 0.8);
+  --glass-bg-end: rgba(10, 15, 26, 0.9);
+  --glass-border: rgba(32, 201, 151, 0.2);
+  --glass-border-hover: rgba(32, 201, 151, 0.5);
+  --grid-line: rgba(255, 255, 255, 0.05);
+  --neon-color: #fff;
+  --card-text: #fff;
+  --scrollbar-track: #1e293b;
+  --hero-bg-center: #0c1320;
+  --hero-bg-outer: #09111f;
+  --transition-theme: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+// Light / warm mode
+[data-theme="light"] {
+  --body-bg: #faf9f5;
+  --body-bg-darker: #e3dacc;
+  --body-color: #28383e;
+  --primary: #749e9a;
+  --primary-rgb: 116, 158, 154;
+  --glass-bg-start: rgba(255, 253, 248, 0.92);
+  --glass-bg-end: rgba(252, 249, 242, 0.97);
+  --glass-border: rgba(40, 56, 62, 0.18);
+  --glass-border-hover: rgba(116, 158, 154, 0.5);
+  --grid-line: rgba(0, 0, 0, 0.05);
+  --neon-color: #28383e;
+  --card-text: #28383e;
+  --scrollbar-track: #e3dacc;
+  --hero-bg-center: #f0ece3;
+  --hero-bg-outer: #e8e2d7;
+  // Neobrutalist shadow tokens (light-mode only)
+  --neo-border: rgba(40, 56, 62, 0.2);
+  --neo-border-hover: rgba(116, 158, 154, 0.45);
+  --neo-shadow: 4px 4px 0 rgba(40, 56, 62, 0.72);
+  --neo-shadow-sm: 3px 3px 0 rgba(40, 56, 62, 0.65);
+  --neo-shadow-press: 2px 2px 0 rgba(40, 56, 62, 0.72);
+  --neo-shadow-press-sm: 1px 1px 0 rgba(40, 56, 62, 0.65);
+}
+
+// Bootstrap + body overrides for runtime theming
 body {
   overflow-x: hidden;
+  background-color: var(--body-bg) !important;
+  color: var(--body-color) !important;
+  transition: var(--transition-theme);
 }
 
 .letter-spacing-2 {
@@ -19,11 +69,12 @@ body {
 }
 
 .bg-darker {
-  background-color: darken($body-bg, 2%) !important;
+  background-color: var(--body-bg-darker) !important;
+  transition: var(--transition-theme);
 }
 
 .hover-primary:hover {
-  color: $primary !important;
+  color: var(--primary) !important;
 }
 
 .text-justify {
@@ -45,15 +96,15 @@ body {
     box-shadow 0.3s ease;
   &:hover {
     transform: translateY(-5px);
-    border-color: $primary !important;
-    box-shadow: 0 10px 30px -10px rgba($primary, 0.3);
+    border-color: var(--primary) !important;
+    box-shadow: 0 10px 30px -10px rgba(var(--primary-rgb), 0.3);
   }
 }
 
 // Shared Glass Card Style
 %glass-card {
-  background: linear-gradient(145deg, rgba(15, 23, 42, 0.8) 0%, rgba(10, 15, 26, 0.9) 100%);
-  border: 1px solid rgba(45, 212, 191, 0.2);
+  background: linear-gradient(145deg, var(--glass-bg-start) 0%, var(--glass-bg-end) 100%);
+  border: 1px solid var(--glass-border);
   position: relative;
   overflow: hidden;
   backdrop-filter: blur(10px);
@@ -63,7 +114,8 @@ body {
   transition:
     transform 0.5s ease,
     border-color 0.5s ease,
-    box-shadow 0.5s ease;
+    box-shadow 0.5s ease,
+    background 0.4s ease;
 
   // Top gradient highlight
   &::before {
@@ -73,16 +125,16 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(800px circle at top center, rgba($primary, 0.08), transparent 40%);
+    background: radial-gradient(800px circle at top center, rgba(var(--primary-rgb), 0.08), transparent 40%);
     opacity: 0.6;
     transition: opacity 0.3s ease;
     z-index: 0;
   }
 
   &:hover {
-    border-color: rgba(45, 212, 191, 0.5);
+    border-color: var(--glass-border-hover);
     transform: translateY(-5px);
-    box-shadow: 0 10px 30px -10px rgba($primary, 0.15);
+    box-shadow: 0 10px 30px -10px rgba(var(--primary-rgb), 0.15);
 
     &::before {
       opacity: 1;
@@ -100,8 +152,7 @@ body {
 // Grid Background
 .hero-background {
   background-size: 50px 50px;
-  background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-image: linear-gradient(to right, var(--grid-line) 1px, transparent 1px), linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
   // Constrain grid visibility to avoid hard edges
   mask-image: radial-gradient(circle at center, black 30%, transparent 70%);
   -webkit-mask-image: radial-gradient(circle at center, black 30%, transparent 70%);
@@ -120,7 +171,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba($primary, 0.15), transparent 40%);
+  background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(var(--primary-rgb), 0.15), transparent 40%);
   z-index: 0;
   pointer-events: none;
   transition: background 0.1s ease;
@@ -131,12 +182,13 @@ body {
 }
 
 .text-neon {
-  color: #fff;
+  color: var(--neon-color);
   text-shadow:
-    0 0 5px rgba($primary, 0.8),
-    0 0 10px rgba($primary, 0.6),
-    0 0 20px rgba($primary, 0.4),
-    0 0 40px rgba($primary, 0.2);
+    0 0 5px rgba(var(--primary-rgb), 0.8),
+    0 0 10px rgba(var(--primary-rgb), 0.6),
+    0 0 20px rgba(var(--primary-rgb), 0.4),
+    0 0 40px rgba(var(--primary-rgb), 0.2);
+  transition: color 0.4s ease;
 }
 
 .hero-btn {
@@ -150,7 +202,7 @@ body {
     box-shadow 0.3s ease;
 
   &:hover {
-    color: $primary !important;
+    color: var(--primary) !important;
     transform: translateY(-3px) scale(1.1);
   }
 
@@ -161,7 +213,7 @@ body {
 
 // Mouse Scroll Indicator
 .scrolldown {
-  --color: #{$primary};
+  --color: var(--primary);
   --sizeX: 30px;
   --sizeY: 50px;
   position: relative;
@@ -175,27 +227,27 @@ body {
 
   // Neon glow effect for the border
   box-shadow:
-    0 0 10px rgba($primary, 0.4),
-    inset 0 0 10px rgba($primary, 0.4);
+    0 0 10px rgba(var(--primary-rgb), 0.4),
+    inset 0 0 10px rgba(var(--primary-rgb), 0.4);
 
   @media (min-width: 576px) {
     margin-bottom: 16px;
   }
-}
 
-.scrolldown::before {
-  content: "";
-  position: absolute;
-  bottom: 30px;
-  left: 50%;
-  width: 6px;
-  height: 6px;
-  margin-left: -3px;
-  background-color: var(--color);
-  border-radius: 100%;
-  animation: scrolldown-anim 2s infinite;
-  box-sizing: border-box;
-  box-shadow: 0px -5px 10px 1px rgba($primary, 0.4);
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    width: 6px;
+    height: 6px;
+    margin-left: -3px;
+    background-color: var(--color);
+    border-radius: 100%;
+    animation: scrolldown-anim 2s infinite;
+    box-sizing: border-box;
+    box-shadow: 0px -5px 10px 1px rgba(var(--primary-rgb), 0.4);
+  }
 }
 
 @keyframes scrolldown-anim {
@@ -236,14 +288,14 @@ body {
   width: 10px;
   height: 10px;
   transform: rotate(45deg);
-}
 
-.chevrondown:nth-child(odd) {
-  animation: pulse54012 500ms ease infinite alternate;
-}
+  &:nth-child(odd) {
+    animation: pulse54012 500ms ease infinite alternate;
+  }
 
-.chevrondown:nth-child(even) {
-  animation: pulse54012 500ms ease infinite alternate 250ms;
+  &:nth-child(even) {
+    animation: pulse54012 500ms ease infinite alternate 250ms;
+  }
 }
 
 @keyframes pulse54012 {
@@ -257,7 +309,8 @@ body {
 
 // Hero Section Transition
 .hero-section {
-  background: radial-gradient(circle at center, darken($body-bg, 3%), darken($body-bg, 5%));
+  background: radial-gradient(circle at center, var(--hero-bg-center), var(--hero-bg-outer));
+  transition: background 0.4s ease;
 
   h1 {
     font-size: clamp(2.5rem, 9vw, 6rem);
@@ -275,7 +328,7 @@ body {
     left: 0;
     width: 100%;
     height: 150px;
-    background: linear-gradient(to bottom, transparent, $body-bg);
+    background: linear-gradient(to bottom, transparent, var(--body-bg));
     z-index: 1;
     pointer-events: none;
   }
@@ -287,6 +340,10 @@ body {
 }
 
 .about-card {
+  p {
+    font-size: 1rem;
+  }
+
   @media (min-width: 768px) and (max-width: 991px) {
     max-width: 75%;
     margin: 0 auto;
@@ -365,14 +422,15 @@ body {
 
 // ### PROJECTS ###
 .bg-dark-glass {
-  background: rgba($dark, 0.6);
+  background: var(--glass-bg-start);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--glass-border);
+  transition: var(--transition-theme);
 
   &:hover {
-    background: rgba($primary, 0.1);
-    border-color: $primary;
-    color: white !important;
+    background: rgba(var(--primary-rgb), 0.1);
+    border-color: var(--primary);
+    color: var(--body-color) !important;
   }
 }
 
@@ -402,8 +460,8 @@ body {
 
   &:hover {
     transform: none;
-    box-shadow: 0 10px 30px -10px rgba($primary, 0.2);
-    border-color: rgba($primary, 0.5);
+    box-shadow: 0 10px 30px -10px rgba(var(--primary-rgb), 0.2);
+    border-color: rgba(var(--primary-rgb), 0.5);
 
     img {
       transform: scale(1.05);
@@ -446,13 +504,13 @@ body {
 
   &:hover {
     transform: scale(1.1) translateZ(0);
-    color: $primary;
+    color: var(--primary);
   }
 }
 
 .vertical-divider {
   display: inline-block;
-  background-color: $primary;
+  background-color: var(--primary);
   width: 2px;
   height: 24px;
   border-radius: 1px;
@@ -464,14 +522,14 @@ body {
 
   .icon-transition,
   h5 {
-    color: #fff;
+    color: var(--card-text);
     transition: color 0.3s ease;
   }
 
   &:hover {
     .icon-transition,
     h5 {
-      color: $primary;
+      color: var(--primary);
     }
   }
 }
@@ -482,14 +540,330 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: $dark;
+  background: var(--scrollbar-track);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: darken($primary, 10%);
+  background: rgba(var(--primary-rgb), 0.6);
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: $primary;
+  background: var(--primary);
+}
+
+// ### LIGHT MODE OVERRIDES ###
+[data-theme="light"] {
+  // Tech icon inversion fix
+  .invert-white {
+    filter: none;
+  }
+
+  // H1 — no neon glow, clean dark text
+  .text-neon {
+    text-shadow: none;
+  }
+
+  // SVG Outline drawing effect for Hero title
+  .outline-text {
+    --draw-duration: 2.5s;
+    --fill-duration: 0.5s;
+    --fill-delay: 3s; /* Waits until the last letter is completely drawn before filling ALL letters */
+
+    fill: transparent;
+    stroke: var(--neon-color);
+    stroke-width: 2px;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    paint-order: stroke fill;
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+
+    animation:
+      drawLetter var(--draw-duration) ease-in-out forwards var(--anim-delay, 0s),
+      fillLetter var(--fill-duration) ease-in forwards var(--fill-delay);
+    font-size: inherit;
+    font-family: inherit;
+    font-weight: inherit;
+  }
+
+  @keyframes drawLetter {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes fillLetter {
+    to {
+      fill: var(--neon-color);
+    }
+  }
+
+  // Bootstrap primary text — runtime colour
+  .text-primary {
+    color: var(--primary) !important;
+  }
+
+  // Secondary text — deep warm dark
+  .text-secondary {
+    color: #28383e !important;
+  }
+
+  // Ensure hover-primary beats the .text-secondary !important override above
+  .hover-primary:hover {
+    color: var(--primary) !important;
+  }
+
+  .text-white,
+  .text-light {
+    color: #28383e !important;
+  }
+
+  .border-secondary {
+    border-color: var(--neo-border) !important;
+  }
+
+  // Outline primary button — runtime colour
+  .btn-outline-primary {
+    color: var(--primary) !important;
+    border-color: var(--primary) !important;
+
+    &:hover {
+      background-color: var(--primary) !important;
+      border-color: var(--primary) !important;
+      color: #fff !important;
+    }
+  }
+
+  // Filled primary button — starts filled, darkens on hover
+  .btn-primary {
+    --bs-btn-bg: var(--primary);
+    --bs-btn-border-color: var(--primary);
+    --bs-btn-hover-bg: #5e8480;
+    --bs-btn-hover-border-color: #5e8480;
+    --bs-btn-active-bg: #5e8480;
+    --bs-btn-active-border-color: #5e8480;
+    --bs-btn-focus-box-shadow: none;
+    --bs-btn-color: #fff;
+    --bs-btn-hover-color: #fff;
+    color: #fff !important;
+  }
+
+  // ── Neobrutalist diagonal shadow ─────────────────────────────────────────
+  // Solid offset shadow (no blur), element shifts into/out of it on interaction
+
+  .gradient-card {
+    border-color: var(--neo-border) !important;
+    box-shadow: var(--neo-shadow) !important;
+
+    &:hover {
+      transform: translate(-1px, -1px) !important;
+      border-color: var(--neo-border-hover) !important;
+      box-shadow: var(--neo-shadow) !important;
+    }
+  }
+
+  // GPU-accelerated to prevent glitchy hover from .hover-effect vs %glass-card conflict
+  .contact-card {
+    border-color: var(--neo-border) !important;
+    box-shadow: var(--neo-shadow) !important;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    will-change: transform;
+
+    &:hover {
+      transform: translate(-1px, -1px) translateZ(0) !important;
+      border-color: var(--neo-border-hover) !important;
+      box-shadow: var(--neo-shadow) !important;
+    }
+
+    &:active {
+      transform: translate(2px, 2px) translateZ(0) !important;
+      box-shadow: var(--neo-shadow-press) !important;
+    }
+  }
+
+  // About cards — light mode only fixes
+  .about-card {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+
+    &:hover {
+      transform: none !important;
+    }
+
+    .text-primary {
+      color: #28383e !important;
+    }
+
+    h5 {
+      color: var(--card-text);
+    }
+  }
+
+  // Bio card — no hover movement in light mode
+  .about-card-0:hover {
+    transform: none !important;
+  }
+
+  // Pastel backgrounds per card (in order)
+  .about-card-0 {
+    background: #e3dacc !important;
+  }
+
+  .about-card-1 {
+    background: #bcd1ca !important;
+  }
+
+  .about-card-2 {
+    background: #cbcadb !important;
+  }
+
+  .about-card-3 {
+    background: #6a9bcc !important;
+  }
+
+  .tech-carousel-container {
+    padding: 6px 0; // Room for offset shadow so it isn't clipped by overflow:hidden
+  }
+
+  .tech-card {
+    border-color: var(--neo-border) !important;
+    box-shadow: var(--neo-shadow) !important;
+
+    &:hover {
+      transform: none !important;
+      box-shadow: var(--neo-shadow) !important;
+    }
+  }
+
+  .project-image-container {
+    border-color: var(--neo-border) !important;
+    box-shadow: var(--neo-shadow) !important;
+
+    &:hover {
+      transform: none !important;
+      border-color: var(--neo-border-hover) !important;
+      box-shadow: var(--neo-shadow) !important;
+    }
+  }
+
+  // Project cards — pastel backgrounds matching about-card-1/2/3
+  .projects-gap > div:nth-child(1) .project-image-container {
+    background: #bcd1ca !important;
+  }
+
+  .projects-gap > div:nth-child(2) .project-image-container {
+    background: #cbcadb !important;
+  }
+
+  .projects-gap > div:nth-child(3) .project-image-container {
+    background: #6a9bcc !important;
+  }
+
+  .hover-effect {
+    border-color: var(--neo-border) !important;
+    box-shadow: var(--neo-shadow);
+
+    &:hover {
+      transform: translate(-1px, -1px);
+      box-shadow: var(--neo-shadow);
+    }
+
+    &:active {
+      transform: translate(2px, 2px);
+      box-shadow: var(--neo-shadow-press);
+    }
+  }
+
+  .hero-btn {
+    color: #28383e !important;
+    border-color: var(--neo-border) !important;
+    box-shadow: var(--neo-shadow-sm) !important;
+
+    &:hover {
+      color: var(--primary) !important;
+      transform: translate(-1px, -1px) !important;
+      border-color: var(--neo-border-hover) !important;
+      box-shadow: var(--neo-shadow-sm) !important;
+    }
+
+    &:active {
+      transform: translate(2px, 2px) !important;
+      box-shadow: var(--neo-shadow-press-sm) !important;
+    }
+  }
+
+  // Project icon links — dark default, teal on hover
+  .project-icon-link {
+    color: #28383e !important;
+
+    &:hover {
+      color: var(--primary) !important;
+    }
+  }
+
+  .theme-toggle {
+    border-color: var(--glass-border) !important;
+    box-shadow: var(--neo-shadow-sm) !important;
+
+    &:hover {
+      border-color: var(--neo-border-hover) !important;
+      box-shadow: var(--neo-shadow-sm) !important;
+      transform: translate(-1px, -1px) !important;
+    }
+
+    &:active {
+      transform: translate(2px, 2px);
+      box-shadow: var(--neo-shadow-press-sm);
+    }
+  }
+}
+
+// ### THEME TOGGLE BUTTON ###
+.theme-toggle {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 9999;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--glass-border);
+  background: linear-gradient(145deg, var(--glass-bg-start) 0%, var(--glass-bg-end) 100%);
+  backdrop-filter: blur(10px);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 0;
+  }
+
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.2s ease,
+    background 0.4s ease;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.15),
+    0 0 0 0 rgba(var(--primary-rgb), 0);
+
+  &:hover {
+    border-color: var(--glass-border-hover);
+    box-shadow:
+      0 8px 20px -4px rgba(0, 0, 0, 0.2),
+      0 0 12px rgba(var(--primary-rgb), 0.25);
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: scale(0.9);
+  }
 }
