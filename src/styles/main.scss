@@ -333,6 +333,10 @@ body {
 }
 
 .about-card {
+  p {
+    font-size: 1rem;
+  }
+
   @media (min-width: 768px) and (max-width: 991px) {
     max-width: 75%;
     margin: 0 auto;
@@ -557,7 +561,7 @@ body {
   .outline-text {
     --draw-duration: 2.5s;
     --fill-duration: 0.5s;
-    --fill-delay: 3.0s; /* Waits until the last letter is completely drawn before filling ALL letters */
+    --fill-delay: 3s; /* Waits until the last letter is completely drawn before filling ALL letters */
 
     fill: transparent;
     stroke: var(--neon-color);
@@ -567,9 +571,9 @@ body {
     paint-order: stroke fill;
     stroke-dasharray: 1000;
     stroke-dashoffset: 1000;
-    
-    animation: 
-      drawLetter var(--draw-duration) ease-in-out forwards var(--anim-delay, 0s), 
+
+    animation:
+      drawLetter var(--draw-duration) ease-in-out forwards var(--anim-delay, 0s),
       fillLetter var(--fill-duration) ease-in forwards var(--fill-delay);
     font-size: inherit;
     font-family: inherit;
@@ -636,8 +640,57 @@ body {
     &:hover {
       transform: translate(-1px, -1px) !important;
       border-color: rgba(116, 158, 154, 0.45) !important;
-      box-shadow: 5px 5px 0 rgba(40, 56, 62, 0.72) !important;
+      // Keep shadow size fixed — visual shift comes from translate, not shadow growth
+      box-shadow: 4px 4px 0 rgba(40, 56, 62, 0.72) !important;
     }
+  }
+
+  // About cards — light mode only fixes
+  .about-card {
+    // Solid pastel bg makes backdrop-filter pointless; disabling it eliminates
+    // the blurry repaint that occurs when the GPU recomposites the blur on transform
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+
+    // No movement on hover — static cards
+    &:hover {
+      transform: none !important;
+    }
+
+    // Icons use the same dark colour as the hero h1
+    .text-primary {
+      color: #28383e !important;
+    }
+
+    h5 {
+      color: var(--card-text);
+    }
+  }
+
+  // Bio card — no hover movement in light mode
+  .about-card-0:hover {
+    transform: none !important;
+  }
+
+  // Pastel backgrounds per card (in order)
+  .about-card-0 {
+    background: #e3dacc !important;
+  }
+
+  .about-card-1 {
+    background: #bcd1ca !important;
+  }
+
+  .about-card-2 {
+    background: #cbcadb !important;
+  }
+
+  .about-card-3 {
+    background: #6a9bcc !important;
+  }
+
+  .tech-carousel-container {
+    padding: 6px 0; // Room for offset shadow so it isn't clipped by overflow:hidden
   }
 
   .tech-card {
@@ -645,8 +698,8 @@ body {
     box-shadow: 4px 4px 0 rgba(40, 56, 62, 0.72) !important;
 
     &:hover {
-      transform: translate(-1px, -1px) !important;
-      box-shadow: 5px 5px 0 rgba(40, 56, 62, 0.72) !important;
+      transform: none !important; // No card movement — only the icon inside scales
+      box-shadow: 4px 4px 0 rgba(40, 56, 62, 0.72) !important; // Keep shadow at 4px
     }
   }
 

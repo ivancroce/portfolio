@@ -31,8 +31,10 @@ const techs: Tech[] = [
   { name: "Postman", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg" },
   { name: "VS Code", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" },
   { name: "IntelliJ", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/intellij/intellij-original.svg" },
-  { name: "WordPress", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg", invert: true },
-  { name: "Canva", img: "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/canva.svg", invert: true }
+  { name: "WordPress", img: "/wordpress-logo.webp" },
+  { name: "Canva", img: "/canva-logo.webp" },
+  { name: "Claude", img: "/claude-logo.png" },
+  { name: "Antigravity", img: "/antigravity-logo.png" }
 ];
 
 const TechStack = () => {
