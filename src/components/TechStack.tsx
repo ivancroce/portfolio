@@ -68,7 +68,7 @@ const TechStack = () => {
     <section className="py-5 bg-darker overflow-hidden" id="tech-stack">
       <motion.div variants={containerVariants} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.1 }} className="container-fluid py-5">
         <div className="text-center mb-5">
-          <motion.h6 variants={headerVariants} className="text-primary text-uppercase letter-spacing-2 mb-2">
+          <motion.h6 variants={headerVariants} className="text-primary text-uppercase letter-spacing-2 mb-2 fw-semibold">
             Tech Stack
           </motion.h6>
           <motion.h2 variants={titleVariants} className="display-4 fw-bold">

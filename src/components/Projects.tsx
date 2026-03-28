@@ -66,7 +66,7 @@ const Projects = () => {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.1 }}
-            className="text-primary text-uppercase letter-spacing-2 mb-2"
+            className="text-primary text-uppercase letter-spacing-2 mb-2 fw-semibold"
           >
             Projects
           </motion.h6>

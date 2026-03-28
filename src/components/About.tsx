@@ -22,7 +22,7 @@ const About = () => {
     <section className="py-5 overflow-hidden" id="about">
       <motion.div variants={containerVariants} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.1 }} className="container py-5">
         <div className="text-center mb-5">
-          <motion.h6 variants={headerVariants} className="text-primary text-uppercase letter-spacing-2 mb-2">
+          <motion.h6 variants={headerVariants} className="text-primary text-uppercase letter-spacing-2 mb-2 fw-semibold">
             About Me
           </motion.h6>
           <motion.h2 variants={subHeaderVariants} className="display-5 fw-bold">

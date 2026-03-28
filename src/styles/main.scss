@@ -47,6 +47,13 @@
   --scrollbar-track: #e3dacc;
   --hero-bg-center: #f0ece3;
   --hero-bg-outer: #e8e2d7;
+  // Neobrutalist shadow tokens (light-mode only)
+  --neo-border: rgba(40, 56, 62, 0.2);
+  --neo-border-hover: rgba(116, 158, 154, 0.45);
+  --neo-shadow: 4px 4px 0 rgba(40, 56, 62, 0.72);
+  --neo-shadow-sm: 3px 3px 0 rgba(40, 56, 62, 0.65);
+  --neo-shadow-press: 2px 2px 0 rgba(40, 56, 62, 0.72);
+  --neo-shadow-press-sm: 1px 1px 0 rgba(40, 56, 62, 0.65);
 }
 
 // Bootstrap + body overrides for runtime theming
@@ -226,21 +233,21 @@ body {
   @media (min-width: 576px) {
     margin-bottom: 16px;
   }
-}
 
-.scrolldown::before {
-  content: "";
-  position: absolute;
-  bottom: 30px;
-  left: 50%;
-  width: 6px;
-  height: 6px;
-  margin-left: -3px;
-  background-color: var(--color);
-  border-radius: 100%;
-  animation: scrolldown-anim 2s infinite;
-  box-sizing: border-box;
-  box-shadow: 0px -5px 10px 1px rgba(var(--primary-rgb), 0.4);
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    width: 6px;
+    height: 6px;
+    margin-left: -3px;
+    background-color: var(--color);
+    border-radius: 100%;
+    animation: scrolldown-anim 2s infinite;
+    box-sizing: border-box;
+    box-shadow: 0px -5px 10px 1px rgba(var(--primary-rgb), 0.4);
+  }
 }
 
 @keyframes scrolldown-anim {
@@ -281,14 +288,14 @@ body {
   width: 10px;
   height: 10px;
   transform: rotate(45deg);
-}
 
-.chevrondown:nth-child(odd) {
-  animation: pulse54012 500ms ease infinite alternate;
-}
+  &:nth-child(odd) {
+    animation: pulse54012 500ms ease infinite alternate;
+  }
 
-.chevrondown:nth-child(even) {
-  animation: pulse54012 500ms ease infinite alternate 250ms;
+  &:nth-child(even) {
+    animation: pulse54012 500ms ease infinite alternate 250ms;
+  }
 }
 
 @keyframes pulse54012 {
@@ -607,18 +614,13 @@ body {
     color: var(--primary) !important;
   }
 
-  // text-white / text-light → dark in light mode
-  .text-white {
-    color: #28383e !important;
-  }
-
+  .text-white,
   .text-light {
     color: #28383e !important;
   }
 
-  // Bootstrap badge borders
   .border-secondary {
-    border-color: rgba(40, 56, 62, 0.2) !important;
+    border-color: var(--neo-border) !important;
   }
 
   // Outline primary button — runtime colour
@@ -650,23 +652,21 @@ body {
   // ── Neobrutalist diagonal shadow ─────────────────────────────────────────
   // Solid offset shadow (no blur), element shifts into/out of it on interaction
 
-  // Glass cards — project images, about cards
   .gradient-card {
-    border-color: rgba(40, 56, 62, 0.2) !important;
-    box-shadow: 4px 4px 0 rgba(40, 56, 62, 0.72) !important;
+    border-color: var(--neo-border) !important;
+    box-shadow: var(--neo-shadow) !important;
 
     &:hover {
       transform: translate(-1px, -1px) !important;
-      border-color: rgba(116, 158, 154, 0.45) !important;
-      box-shadow: 4px 4px 0 rgba(40, 56, 62, 0.72) !important;
+      border-color: var(--neo-border-hover) !important;
+      box-shadow: var(--neo-shadow) !important;
     }
   }
 
-  // Contact cards — single consolidated rule to avoid
-  // conflicting transitions from .hover-effect (0.3s) vs %glass-card (0.5s)
+  // GPU-accelerated to prevent glitchy hover from .hover-effect vs %glass-card conflict
   .contact-card {
-    border-color: rgba(40, 56, 62, 0.2) !important;
-    box-shadow: 4px 4px 0 rgba(40, 56, 62, 0.72) !important;
+    border-color: var(--neo-border) !important;
+    box-shadow: var(--neo-shadow) !important;
     transform: translateZ(0);
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
@@ -674,13 +674,13 @@ body {
 
     &:hover {
       transform: translate(-1px, -1px) translateZ(0) !important;
-      border-color: rgba(116, 158, 154, 0.45) !important;
-      box-shadow: 4px 4px 0 rgba(40, 56, 62, 0.72) !important;
+      border-color: var(--neo-border-hover) !important;
+      box-shadow: var(--neo-shadow) !important;
     }
 
     &:active {
       transform: translate(2px, 2px) translateZ(0) !important;
-      box-shadow: 2px 2px 0 rgba(40, 56, 62, 0.72) !important;
+      box-shadow: var(--neo-shadow-press) !important;
     }
   }
 
@@ -729,23 +729,23 @@ body {
   }
 
   .tech-card {
-    border-color: rgba(40, 56, 62, 0.2) !important;
-    box-shadow: 4px 4px 0 rgba(40, 56, 62, 0.72) !important;
+    border-color: var(--neo-border) !important;
+    box-shadow: var(--neo-shadow) !important;
 
     &:hover {
       transform: none !important;
-      box-shadow: 4px 4px 0 rgba(40, 56, 62, 0.72) !important;
+      box-shadow: var(--neo-shadow) !important;
     }
   }
 
   .project-image-container {
-    border-color: rgba(40, 56, 62, 0.2) !important;
-    box-shadow: 4px 4px 0 rgba(40, 56, 62, 0.72) !important;
+    border-color: var(--neo-border) !important;
+    box-shadow: var(--neo-shadow) !important;
 
     &:hover {
       transform: none !important;
-      border-color: rgba(116, 158, 154, 0.45) !important;
-      box-shadow: 4px 4px 0 rgba(40, 56, 62, 0.72) !important;
+      border-color: var(--neo-border-hover) !important;
+      box-shadow: var(--neo-shadow) !important;
     }
   }
 
@@ -762,38 +762,36 @@ body {
     background: #6a9bcc !important;
   }
 
-  // Hover-effect class (About cards, Contact cards, GitHub button)
   .hover-effect {
-    border-color: rgba(40, 56, 62, 0.2) !important;
-    box-shadow: 4px 4px 0 rgba(40, 56, 62, 0.72);
+    border-color: var(--neo-border) !important;
+    box-shadow: var(--neo-shadow);
 
     &:hover {
       transform: translate(-1px, -1px);
-      box-shadow: 4px 4px 0 rgba(40, 56, 62, 0.72);
+      box-shadow: var(--neo-shadow);
     }
 
     &:active {
       transform: translate(2px, 2px);
-      box-shadow: 2px 2px 0 rgba(40, 56, 62, 0.72);
+      box-shadow: var(--neo-shadow-press);
     }
   }
 
-  // Hero icon buttons — dark icons, diagonal shadow
   .hero-btn {
     color: #28383e !important;
-    border-color: rgba(40, 56, 62, 0.2) !important;
-    box-shadow: 3px 3px 0 rgba(40, 56, 62, 0.65) !important;
+    border-color: var(--neo-border) !important;
+    box-shadow: var(--neo-shadow-sm) !important;
 
     &:hover {
       color: var(--primary) !important;
       transform: translate(-1px, -1px) !important;
-      border-color: rgba(116, 158, 154, 0.45) !important;
-      box-shadow: 3px 3px 0 rgba(40, 56, 62, 0.65) !important;
+      border-color: var(--neo-border-hover) !important;
+      box-shadow: var(--neo-shadow-sm) !important;
     }
 
     &:active {
       transform: translate(2px, 2px) !important;
-      box-shadow: 1px 1px 0 rgba(40, 56, 62, 0.65) !important;
+      box-shadow: var(--neo-shadow-press-sm) !important;
     }
   }
 
@@ -806,20 +804,19 @@ body {
     }
   }
 
-  // Theme toggle
   .theme-toggle {
-    border-color: rgba(40, 56, 62, 0.18) !important;
-    box-shadow: 3px 3px 0 rgba(40, 56, 62, 0.65) !important;
+    border-color: var(--glass-border) !important;
+    box-shadow: var(--neo-shadow-sm) !important;
 
     &:hover {
-      border-color: rgba(116, 158, 154, 0.45) !important;
-      box-shadow: 3px 3px 0 rgba(40, 56, 62, 0.65) !important;
+      border-color: var(--neo-border-hover) !important;
+      box-shadow: var(--neo-shadow-sm) !important;
       transform: translate(-1px, -1px) !important;
     }
 
     &:active {
       transform: translate(2px, 2px);
-      box-shadow: 1px 1px 0 rgba(40, 56, 62, 0.65);
+      box-shadow: var(--neo-shadow-press-sm);
     }
   }
 }
