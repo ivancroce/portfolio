@@ -1,0 +1,89 @@
+@use "glass-card" as *;
+
+// ─── Tech Stack Carousel ────────────────────────────────────────────────────
+.tech-carousel-container {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+  // fade effect
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+
+  [data-theme="light"] & {
+    padding: 6px 0; // Room for offset shadow so it isn't clipped by overflow:hidden
+  }
+}
+
+.tech-carousel-track {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding-right: 2rem; // ensure gap is maintained between the 2 tracks
+  flex-shrink: 0; // prevent the track from squishing
+  width: max-content; // force it to be as wide as it's content
+  animation: scroll 60s linear infinite;
+}
+
+.tech-icon {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.invert-white {
+  filter: invert(1) brightness(100%) contrast(100%);
+
+  [data-theme="light"] & {
+    filter: none;
+  }
+}
+
+.tech-card {
+  @include glass-card;
+  width: 100px;
+  height: 100px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+
+  &:hover {
+    transform: none;
+  }
+
+  &:hover .tech-icon {
+    transform: scale(1.1);
+  }
+
+  @media (min-width: 768px) {
+    width: 150px;
+    height: 150px;
+
+    .tech-icon {
+      height: 50px;
+    }
+  }
+
+  [data-theme="light"] & {
+    border-color: var(--neo-border);
+    box-shadow: var(--neo-shadow);
+
+    &:hover {
+      transform: none;
+      box-shadow: var(--neo-shadow);
+    }
+  }
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}

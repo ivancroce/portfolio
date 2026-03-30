@@ -1,0 +1,67 @@
+@use "glass-card" as *;
+
+// ─── About Section ──────────────────────────────────────────────────────────
+.gradient-card {
+  @include glass-card;
+
+  [data-theme="light"] & {
+    border-color: var(--neo-border);
+    box-shadow: var(--neo-shadow);
+
+    &:hover {
+      transform: translate(-1px, -1px);
+      border-color: var(--neo-border-hover);
+      box-shadow: var(--neo-shadow);
+    }
+  }
+}
+
+.about-card {
+  p {
+    font-size: 1rem;
+  }
+
+  @media (min-width: 768px) and (max-width: 991px) {
+    max-width: 75%;
+    margin: 0 auto;
+  }
+
+  [data-theme="light"] & {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+
+    &:hover {
+      transform: none;
+    }
+
+    .text-primary {
+      color: #28383e !important; // overrides Bootstrap .text-primary !important
+    }
+
+    h5 {
+      color: var(--card-text);
+    }
+  }
+}
+
+// Bio card — no hover movement in light mode
+[data-theme="light"] .about-card-0:hover {
+  transform: none;
+}
+
+// Pastel backgrounds per card (in order)
+[data-theme="light"] .about-card-0 {
+  background: #e3dacc;
+}
+
+[data-theme="light"] .about-card-1 {
+  background: #bcd1ca;
+}
+
+[data-theme="light"] .about-card-2 {
+  background: #cbcadb;
+}
+
+[data-theme="light"] .about-card-3 {
+  background: #6a9bcc;
+}
