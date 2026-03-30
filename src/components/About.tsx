@@ -36,7 +36,8 @@ const About = () => {
               <div className="card-body text-secondary">
                 <p className="lead text-secondary mb-4">
                   I'm a <span className="text-white fw-semibold">Junior Full Stack Developer</span> building responsive web apps with
-                  <span className="text-primary"> React and TypeScript </span> for the frontend and <span className="text-primary">Java with Spring Boot </span>
+                  <span className="text-primary fw-semibold"> React and TypeScript </span> for the frontend and{" "}
+                  <span className="text-primary fw-semibold">Java with Spring Boot </span>
                   for the backend, constantly learning best practices along the way.
                 </p>
 
