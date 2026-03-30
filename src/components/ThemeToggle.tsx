@@ -11,6 +11,11 @@ const ThemeToggle = () => {
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", isDark ? "dark" : "light");
     localStorage.setItem("theme", isDark ? "dark" : "light");
+
+    const favicon = document.querySelector<HTMLLinkElement>("link[rel='icon']");
+    if (favicon) {
+      favicon.href = isDark ? "/favicon.png" : "/favicon-light.png";
+    }
   }, [isDark]);
 
   return (
