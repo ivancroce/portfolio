@@ -1,0 +1,127 @@
+// ─── Body & Bootstrap overrides for runtime theming ─────────────────────────
+html body {
+  overflow-x: hidden;
+  background-color: var(--body-bg);
+  color: var(--body-color);
+  transition: var(--transition-theme);
+}
+
+// ─── Utility classes ────────────────────────────────────────────────────────
+.letter-spacing-2 {
+  letter-spacing: 2px;
+}
+
+.bg-darker {
+  background-color: var(--body-bg-darker);
+  transition: var(--transition-theme);
+}
+
+.hover-primary:hover {
+  color: var(--primary) !important;
+}
+
+.text-justify {
+  text-align: justify;
+}
+
+.text-relaxed {
+  line-height: 1.7;
+}
+
+.mw-600 {
+  max-width: 600px;
+}
+
+.hover-effect {
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+  &:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary);
+    box-shadow: 0 10px 30px -10px rgba(var(--primary-rgb), 0.3);
+  }
+
+  [data-theme="light"] & {
+    border-color: var(--neo-border);
+    box-shadow: var(--neo-shadow);
+
+    &:hover {
+      transform: translate(-1px, -1px);
+      box-shadow: var(--neo-shadow);
+    }
+
+    &:active {
+      transform: translate(2px, 2px);
+      box-shadow: var(--neo-shadow-press);
+    }
+  }
+}
+
+// ─── Scrollbar ──────────────────────────────────────────────────────────────
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(var(--primary-rgb), 0.6);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+// ─── Light mode: Bootstrap utility overrides ────────────────────────────────
+// These !important are necessary — they override Bootstrap's own !important utilities
+[data-theme="light"] {
+  .text-primary {
+    color: var(--primary) !important;
+  }
+
+  .text-secondary {
+    color: #28383e !important;
+  }
+
+  .hover-primary:hover {
+    color: var(--primary) !important;
+  }
+
+  .text-white,
+  .text-light {
+    color: #28383e !important;
+  }
+
+  .border-secondary {
+    border-color: var(--neo-border) !important;
+  }
+
+  .btn-outline-primary {
+    color: var(--primary) !important;
+    border-color: var(--primary) !important;
+
+    &:hover {
+      background-color: var(--primary) !important;
+      border-color: var(--primary) !important;
+      color: #fff !important;
+    }
+  }
+
+  .btn-primary {
+    --bs-btn-bg: var(--primary);
+    --bs-btn-border-color: var(--primary);
+    --bs-btn-hover-bg: #5e8480;
+    --bs-btn-hover-border-color: #5e8480;
+    --bs-btn-active-bg: #5e8480;
+    --bs-btn-active-border-color: #5e8480;
+    --bs-btn-focus-box-shadow: none;
+    --bs-btn-color: #fff;
+    --bs-btn-hover-color: #fff;
+    color: #fff !important;
+  }
+}

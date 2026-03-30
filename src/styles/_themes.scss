@@ -1,0 +1,46 @@
+// ─── CSS Custom Properties ───────────────────────────────────────────────────
+// Dark mode (default)
+:root {
+  --body-bg: #0f172a;
+  --body-bg-darker: #0c1220;
+  --body-color: #f8f9fa;
+  --primary: #20c997;
+  --primary-rgb: 32, 201, 151;
+  --glass-bg-start: rgba(15, 23, 42, 0.8);
+  --glass-bg-end: rgba(10, 15, 26, 0.9);
+  --glass-border: rgba(32, 201, 151, 0.2);
+  --glass-border-hover: rgba(32, 201, 151, 0.5);
+  --grid-line: rgba(255, 255, 255, 0.05);
+  --neon-color: #fff;
+  --card-text: #fff;
+  --scrollbar-track: #1e293b;
+  --hero-bg-center: #0c1320;
+  --hero-bg-outer: #09111f;
+  --transition-theme: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+// Light / warm mode
+[data-theme="light"] {
+  --body-bg: #faf9f5;
+  --body-bg-darker: #e3dacc;
+  --body-color: #28383e;
+  --primary: #749e9a;
+  --primary-rgb: 116, 158, 154;
+  --glass-bg-start: rgba(255, 253, 248, 0.92);
+  --glass-bg-end: rgba(252, 249, 242, 0.97);
+  --glass-border: rgba(40, 56, 62, 0.18);
+  --glass-border-hover: rgba(116, 158, 154, 0.5);
+  --grid-line: rgba(0, 0, 0, 0.05);
+  --neon-color: #28383e;
+  --card-text: #28383e;
+  --scrollbar-track: #e3dacc;
+  --hero-bg-center: #f0ece3;
+  --hero-bg-outer: #e8e2d7;
+  // Neobrutalist shadow tokens (light-mode only)
+  --neo-border: rgba(40, 56, 62, 0.2);
+  --neo-border-hover: rgba(116, 158, 154, 0.45);
+  --neo-shadow: 4px 4px 0 rgba(40, 56, 62, 0.72);
+  --neo-shadow-sm: 3px 3px 0 rgba(40, 56, 62, 0.65);
+  --neo-shadow-press: 2px 2px 0 rgba(40, 56, 62, 0.72);
+  --neo-shadow-press-sm: 1px 1px 0 rgba(40, 56, 62, 0.65);
+}

@@ -1,0 +1,129 @@
+@use "glass-card" as *;
+
+// ─── Projects Section ───────────────────────────────────────────────────────
+.bg-dark-glass {
+  background: var(--glass-bg-start);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  transition: var(--transition-theme);
+
+  &:hover {
+    background: rgba(var(--primary-rgb), 0.1);
+    border-color: var(--primary);
+    color: var(--body-color);
+  }
+}
+
+.project-image-container {
+  @include glass-card;
+  padding: 1.5rem;
+  aspect-ratio: 16 / 9;
+  height: auto;
+
+  @media (min-width: 992px) and (max-width: 1199px) {
+    max-width: 80%;
+    margin: 0 auto;
+    aspect-ratio: 16/9;
+  }
+
+  @media (min-width: 1200px) {
+    aspect-ratio: auto;
+  }
+
+  img {
+    transition: transform 0.5s ease;
+    will-change: transform; // Hint to browser for smoother animation
+    backface-visibility: hidden; // Prevents blurriness on scale
+    -webkit-backface-visibility: hidden;
+    transform: translateZ(0); // Hardware acceleration
+  }
+
+  &:hover {
+    transform: none;
+    box-shadow: 0 10px 30px -10px rgba(var(--primary-rgb), 0.2);
+    border-color: rgba(var(--primary-rgb), 0.5);
+
+    img {
+      transform: scale(1.05);
+    }
+  }
+
+  [data-theme="light"] & {
+    border-color: var(--neo-border);
+    box-shadow: var(--neo-shadow);
+
+    &:hover {
+      transform: none;
+      border-color: var(--neo-border-hover);
+      box-shadow: var(--neo-shadow);
+    }
+  }
+}
+
+.project-img-custom {
+  object-fit: contain;
+  object-position: center;
+  width: 100%;
+  height: 100%;
+}
+
+.projects-gap {
+  gap: clamp(5rem, 8vw, 10rem);
+}
+
+//* Learning something new everyday
+//! FIX: Smooth Icon Hover in Projects Section
+// It removes the glitchy jump when hovering over the GitHub and Live icons by forcing GPU rendering and smoothing the transition.
+// This is a common issue with inline elements that have transform effects, and this solution ensures a smoother user experience.
+.project-icon-link {
+  // 1. CRITICAL: Inline elements cannot transform smoothly.
+  // This fixes the layout calculation.
+  display: inline-block;
+
+  // 2. THE FIX: Force GPU rendering (Hardware Acceleration)
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-font-smoothing: subpixel-antialiased;
+
+  // 3. Smooth out the transition
+  transition:
+    transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+    color 0.3s ease;
+
+  // 4. Hint to browser to prepare for change
+  will-change: transform;
+
+  &:hover {
+    transform: scale(1.1) translateZ(0);
+    color: var(--primary);
+  }
+
+  [data-theme="light"] & {
+    color: #28383e !important; // overrides Bootstrap .text-light !important
+
+    &:hover {
+      color: var(--primary) !important; // overrides Bootstrap .text-light !important
+    }
+  }
+}
+
+.vertical-divider {
+  display: inline-block;
+  background-color: var(--primary);
+  width: 2px;
+  height: 24px;
+  border-radius: 1px;
+}
+
+// Project cards — pastel backgrounds matching about-card-1/2/3
+[data-theme="light"] .projects-gap > div:nth-child(1) .project-image-container {
+  background: #bcd1ca;
+}
+
+[data-theme="light"] .projects-gap > div:nth-child(2) .project-image-container {
+  background: #cbcadb;
+}
+
+[data-theme="light"] .projects-gap > div:nth-child(3) .project-image-container {
+  background: #6a9bcc;
+}
