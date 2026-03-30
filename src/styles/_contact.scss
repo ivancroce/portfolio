@@ -1,0 +1,40 @@
+@use "glass-card" as *;
+
+// ─── Contact Section ────────────────────────────────────────────────────────
+.contact-card {
+  @include glass-card;
+
+  .icon-transition,
+  h5 {
+    color: var(--card-text);
+    transition: color 0.3s ease;
+  }
+
+  &:hover {
+    .icon-transition,
+    h5 {
+      color: var(--primary);
+    }
+  }
+
+  // GPU-accelerated to prevent glitchy hover from .hover-effect vs glass-card conflict
+  [data-theme="light"] & {
+    border-color: var(--neo-border);
+    box-shadow: var(--neo-shadow);
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    will-change: transform;
+
+    &:hover {
+      transform: translate(-1px, -1px) translateZ(0);
+      border-color: var(--neo-border-hover);
+      box-shadow: var(--neo-shadow);
+    }
+
+    &:active {
+      transform: translate(2px, 2px) translateZ(0);
+      box-shadow: var(--neo-shadow-press);
+    }
+  }
+}
